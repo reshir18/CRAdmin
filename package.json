@@ -1,0 +1,18 @@
+{
+  "name": "my-program",
+  "version": "1.2.5",
+  "scripts": {
+    "start": "concurrently \"npm run watchJS\" \"npm run watchCSS\"  ",
+    "watchJS": "watchify -d -t [ stringify --extensions [.html .hbs] ] src/js/index.js -o www/js/main.js",
+    "watchCSS": "watch \"lessc src/css/style.less > www/css/main.css\" src/css"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.6",
+    "concurrently": "^2.2.0",
+    "jquery": "^2.1.3",
+    "less": "^2.7.1",
+    "stringify": "^5.1.0",
+    "watch": "^0.19.1",
+    "watchify": "^3.7.0"
+  }
+}

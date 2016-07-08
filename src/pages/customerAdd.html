@@ -1,0 +1,78 @@
+<div class="container-fluid">
+  <form id ="addCustomerForm" role="form" data-toggle="validator">
+    <div class="form-group">
+
+      <div class="row">
+
+        <div class="col-md-2">
+          <div class="panel panel-info">
+            <div class="panel-heading"><h3 class="panel-title">Nom</h3></div>
+            <div class="panel-body">
+              <input class="form-control" id="inputLastName" type="text" required></input>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="panel panel-info">
+            <div class="panel-heading"><h3 class="panel-title">Prénom</h3></div>
+            <div class="panel-body">
+              <input class="form-control" id="inputName" type="text" required></input>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="panel panel-info">
+            <div class="panel-heading"><h3 class="panel-title">Nom de la compagnie</h3></div>
+            <div class="panel-body">
+              <input class="form-control" id="inputCompagnieName" type="text" required></input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-3">
+
+            <div class="panel panel-info">
+              <div class="panel-heading"><h3 class="panel-title">Code postal</h3></div>
+              <div class="panel-body inline">
+                <div class="input-group">
+                      <input class="form-control" maxlength="7" style="text-transform:uppercase" pattern = "[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]" id="inputPostalCode" type="text" required></input>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-info">
+              <div class="panel-heading"><h3 class="panel-title">Adresse</h3></div>
+              <div class="panel-body inline">
+                <div class="input-group col-md-10">
+                      <input class="form-control" id="inputAdresseClient" type="text" required></input>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-info">
+            <div class="panel-heading"><h3 class="panel-title">Contact</h3></div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item"><label for="inputTel" class="control-label"># téléphone:</label>
+                  <input class="form-control" id="inputTel" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" placeholder="418-123-4567" type="tel" required></input></li>
+                <li class="list-group-item"><label for="inputCel" class="control-label"># Cél</label>
+                  <input class="form-control" id="inputCel" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" placeholder="418-123-4567" type="tel"></input></li>
+                <li class="list-group-item"><label for="inputEmail" class="control-label">Courriel</label>
+                  <input type="email" class="form-control" id="inputEmail" placeholder="Courriel" data-error="courriel non valide" required>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <button type="submit" class="btn btn-default">Enregistrer</button>
+  </form>
+</div>
+
