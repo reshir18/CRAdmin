@@ -144,6 +144,7 @@ function initJquery()
     if ($( "#datepicker" ).length > 0)
     {
         $( "#datepicker" ).datepicker();
+        $( ".spinnerCR" ).spinner();
         //$('.clockpicker').clockpicker();
     }
 

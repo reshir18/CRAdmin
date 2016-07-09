@@ -1,22 +1,22 @@
 <div class="row">
 
 	<div class="col-md-4">
-		<div class="panel panel-info">
+		<div class="panel panel-success">
 			<div class="panel-heading">Service</div>
 			<div class="funkyradio">
-				<div class="funkyradio-primary">
+				<div class="funkyradio-success">
 		            <input type="radio" onclick="changeTypeTarifRegulier(this);" value="1" name="radio" id="radioService1" class="radioButtonService" />
 		            <label for="radioService1">1 Heure</label>
 		        </div>
-				<div class="funkyradio-primary">
+				<div class="funkyradio-success">
 		            <input type="radio" onclick="changeTypeTarifRegulier(this);" value="2" name="radio" id="radioService2" class="radioButtonService" />
 		            <label for="radioService2">2-3 Heures</label>
 		        </div>
-				<div class="funkyradio-primary">
+				<div class="funkyradio-success">
 		            <input type="radio" onclick="changeTypeTarifRegulier(this);" value="3" name="radio" id="radioService3" class="radioButtonService" />
 		            <label for="radioService3">Même jour</label>
 		        </div>
-				<div class="funkyradio-primary">
+				<div class="funkyradio-success">
 		            <input type="radio" onclick="changeTypeTarifRegulier(this);" value="1" name="radio" id="radioService4" class="radioButtonService" />
 		            <label for="radioService4">Lendemain</label>
 		        </div>
@@ -26,28 +26,28 @@
 
 
 	<div class="col-md-4">
-		<div class="panel panel-info">
+		<div class="panel panel-success">
 			<div class="panel-heading">Frais sup.</div>
 			<ul class="list-group">
 				<li class="list-group-item">
 				    C.O.D
 				    <div class="material-switch pull-right">
 				        <input id="cbxCOD" onclick="addAmount();" name="cbxCOD" type="checkbox" class="radioButtonFraisSup"/>
-				        <label for="cbxCOD" class="label-primary"></label>
+				        <label for="cbxCOD" class="label-success"></label>
 				    </div>
 				</li>
 				<li class="list-group-item">
 				    Frais de camion
 				    <div class="material-switch pull-right">
 				        <input id="cbxCamion" onclick="addAmount();" name="cbxCamion" type="checkbox" class="radioButtonFraisSup"/>
-				        <label for="cbxCamion" class="label-primary"></label>
+				        <label for="cbxCamion" class="label-success"></label>
 				    </div>
 				</li>
 				<li class="list-group-item">
 				    Aller retour
 				    <div class="material-switch pull-right">
 				        <input id="cbxAllerRetour" onclick="addAmount()" name="cbxAllerRetour" type="checkbox" class="radioButtonFraisSup"/>
-				        <label for="cbxAllerRetour" class="label-primary"></label>
+				        <label for="cbxAllerRetour" class="label-success"></label>
 				    </div>
 				</li>
 			</ul>
@@ -55,25 +55,25 @@
 	</div>
 
 	<div class="col-md-4">
-		<div class="panel panel-info">
+		<div class="panel panel-success">
 			<div class="panel-heading">Frais sup.</div>
 			<ul class="list-group">
 				<li class="list-group-item">
 				    Poids sup.
 				    <div class="pull-right">
-				        <input class="" id="inputNBPoundsPlus" min="0" value="0" type="number" required></input>
+				        <input class="" class="spinnerCR"id="inputNBPoundsPlus" min="0" value="0"  required></input>
 				    </div>
 				</li>
 				<li class="list-group-item">
 				    Temps d'attente sup.
 				    <div class="pull-right">
-				       <input class="" id="inputNBMinutesWaitPlus" min="0" value="0" type="number" required></input>
+				       <input class="" class="spinnerCR" id="inputNBMinutesWaitPlus" min="0" value="0"  required></input>
 				    </div>
 				</li>
 				<li class="list-group-item">
 				    Temps de recherche sup.
 				    <div class="pull-right">
-				        <input class="" id="inputNBMinutesFindPlus" min="0" value="0" type="number" required></input>
+				        <input class="" class="spinnerCR"id="inputNBMinutesFindPlus" min="0" value="0"  required></input>
 				    </div>
 				</li>
 			</ul>
