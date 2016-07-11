@@ -3,7 +3,8 @@ var Util = require("./util.js");
 var datas = require('./datas.js');
 
 module.exports = {
-    addCustomerFunction: addCustomerFunction
+    addCustomerFunction: addCustomerFunction,
+    modifyCustomerFunction : modifyCustomerFunction
 }
 
 function addCustomerFunction(customer)
@@ -14,6 +15,14 @@ function addCustomerFunction(customer)
 		return true;
 	}
 	return false;
+}
+
+function modifyCustomerFunction(customer, idx)
+{
+	if(validate(customer))
+	{
+		modifyCustomer(customer, idx);
+	}
 }
 
 function validate(customer)
@@ -80,4 +89,23 @@ function createCustomer(customer)
 		mail : customer.email,
 	}
 	customers.push(objTemp);
+}
+
+function modifyCustomer(customer, idx)
+{
+	let pZone = Util.getPostalZone(customer.postalCode1.toUpperCase());
+	let fullPostalCode = (customer.postalCode1 + " " + customer.postalCode2).toUpperCase();
+	let objTemp = {
+		id: customers[idx].id,
+		name: customer.name,
+		lastName: customer.lastName,
+		compagnieName : customer.compagnieName ? customer.compagnieName: "---",
+		address : customer.address,
+		postalCode : fullPostalCode,
+		zone: pZone,
+		telephone: customer.telHome,
+		cell : customer.telCel ? customer.telCel : "---",
+		mail : customer.email,
+	}
+	customers[idx] = objTemp;
 }

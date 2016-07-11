@@ -27,45 +27,59 @@ Vue.use(VueRouter);
 require('bootstrap');
 require('jquery-ui');
 var tarifDelivery = require('./tarifDelivery.js');
-var newCustomer = require('./newCustomer.js');
+var managerCustomer = require('./managerCustomer.js');
+var modifyCustomerIndex = 0;
 
 
-var Home = Vue.extend({template: '<p>This is foo!</p>'})
+var Home = Vue.extend({
+    template: require("../pages/home.html"),
+    data: function () {return {customers : customers}},
+    methods: {
+        modifyCustomerFunction: function (event) {
+            modifyCustomerIndex = event.target.value;
+            router.go({ name: 'customer', params: { id: event.target.value }});
+        }
+    },
+})
 
-var CustomerAdd = Vue.extend({
-    template: require("../pages/customerAdd.html"),
-    data: function () {return {datas : datas, customers : customers, newCustomer : newCustomer}},
+var customerMenu = Vue.extend({
+    template: require("../pages/customerMenu.html"),
+    data: function () {return {datas : datas, customers : customers, managerCustomer : managerCustomer}},
     methods: {
     addNewCustomer: function (event) {
-        if(newCustomer.addCustomerFunction(this.$data.newCustomer))
+        if(managerCustomer.addCustomerFunction(this.$data.managerCustomer))
         {
-            let postalZone = Util.getPostalZone(this.$data.newCustomer.postalCode1.toUpperCase());
-            alert(postalZone);
+            let postalZone = Util.getPostalZone(this.$data.managerCustomer.postalCode1.toUpperCase());
         }
-            /*alert(this.$data.newCustomer.postalCodeZone);
-        }
-        else
-            alert("NOPE");*/
-      // `event` is the native DOM event
+    },
+    modifyCurrentCustomer : function(event){
+        managerCustomer.modifyCustomerFunction(this.$data.managerCustomer, event.target.value)
     }
   }
 })
 var DeliveryAdd = Vue.extend({
     template: require("../pages/deliveryAdd.html"),
     data: function () {return {datas : datas, customers : customers}},
-    ready: function (done) {initJquery()}
+    ready: function (done) {initJquery()},
+    methods: {
+    addNewDelivery: function (event) {
+
+    }
+  }
 })
 var Admin = Vue.extend({
     template:  require("../pages/admin.html"),
     data: function () {return {datas : datas}},
     ready: function (done) {initJquery()}
 })
-var vueTarifRegulierComponent = Vue.extend({template: require("../components/tarifRegulier.html")})
+var vueTarifRegulierComponent = Vue.extend({template: require("../components/tarifRegulier.html")});
+var vueAllCustomersComponent = Vue.extend({template: require("../components/listAllCustomers.html")})
 var vueTotalLivraisonComponent = Vue.extend({
     template: require("../components/totalLivraison.html"),
     data: function () {return {data : delivery}}
 })
 Vue.component('tarif-reg', vueTarifRegulierComponent);
+Vue.component('list-customers-all', vueAllCustomersComponent);
 Vue.component('total-livraison', vueTotalLivraisonComponent);
 
 // The router needs a root component to render.
@@ -83,13 +97,16 @@ var router = new VueRouter()
 // We'll talk about nested routes later.
 router.map({
     '/home': {
+        name: 'home',
         component: Home
     },
     '/admin': {
+        name: 'admin',
         component: Admin
     },
-    '/customerAdd' : {
-        component: CustomerAdd
+    '/customerMenu/:id' : {
+        name: 'customer',
+        component: customerMenu
     },
     '/deliveryAdd' : {
         component: DeliveryAdd

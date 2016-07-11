@@ -1,0 +1,116 @@
+<div class="container-fluid">
+  <form id ="addCustomerForm" role="form" data-toggle="validator">
+    <div class="form-group">
+
+      <div class="row">
+
+        <div class="col-md-2">
+          <div class="panel panel-success">
+            <div class="panel-heading"><h3 class="panel-title">Prénom</h3></div>
+            <div class="panel-body">
+              <input v-if="$route.params.id>=0" v-model="managerCustomer.name" class="form-control" id="inputLastName" type="text" value="{{customers[$route.params.id].name}}"
+              required></input>
+              <input v-else value="" v-model="managerCustomer.name" class="form-control" id="inputLastName" type="text" required></input>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="panel panel-success">
+            <div class="panel-heading"><h3 class="panel-title">Nom</h3></div>
+            <div class="panel-body">
+              <input v-if="$route.params.id>=0" v-model="managerCustomer.lastName" class="form-control" id="inputName" type="text" value="{{customers[$route.params.id].lastName}}" required></input>
+              <input v-else value="" v-model="managerCustomer.lastName" class="form-control" id="inputName" type="text" required></input>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="panel panel-success">
+            <div class="panel-heading"><h3 class="panel-title">Nom de la compagnie</h3></div>
+            <div class="panel-body">
+              <input v-if="$route.params.id>=0" v-model="managerCustomer.compagnieName" class="form-control" id="inputCompagnieName" type="text"
+              value="{{customers[$route.params.id].compagnieName}}"></input>
+              <input v-else value="" v-model="managerCustomer.compagnieName" class="form-control" id="inputCompagnieName" type="text"></input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-3">
+
+            <div class="panel panel-success">
+              <div class="panel-heading"><h3 class="panel-title">Code postal</h3></div>
+              <div class="panel-body inline">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="input-group">
+                      <input v-if="$route.params.id>=0" v-model="managerCustomer.postalCode1" class="form-control" maxlength="3" placeholder = "A1A" pattern = "[A-Za-z][0-9][A-Za-z]" id="inputPostalCodeA" value="{{customers[$route.params.id].postalCode.substr(0,3)}}" type="text" required style="text-transform:uppercase"></input>
+                      <input v-else value="" v-model="managerCustomer.postalCode1" class="form-control" maxlength="3" placeholder = "A1A" pattern = "[A-Za-z][0-9][A-Za-z]"
+                      id="inputPostalCodeA2"  type="text" required style="text-transform:uppercase"></input>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="input-group">
+                      <input v-if="$route.params.id>=0" v-model="managerCustomer.postalCode2" class="form-control" maxlength="3" placeholder = "1A1" pattern = "[0-9][A-Za-z][0-9]" id="inputPostalCodeA2" value="{{customers[$route.params.id].postalCode.substr(4,7)}}" type="text" required style="text-transform:uppercase"></input>
+                      <input v-else value="" v-model="managerCustomer.postalCode2" class="form-control" maxlength="3" placeholder = "1A1" pattern = "[0-9][A-Za-z][0-9]" id="inputPostalCodeA2"  type="text" required style="text-transform:uppercase"></input>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-success">
+              <div class="panel-heading"><h3 class="panel-title">Adresse</h3></div>
+              <div class="panel-body inline">
+                <div class="input-group col-md-10">
+                  <input v-if="$route.params.id>=0" v-model="managerCustomer.address" class="form-control" id="inputAdresseClient" type="text"
+                  value="{{customers[$route.params.id].address}}" required></input>
+                  <input v-else value="" v-model="managerCustomer.address" class="form-control" id="inputAdresseClient" type="text" required></input>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><h3 class="panel-title">Contact</h3></div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item"><label for="inputTel" class="control-label"># téléphone:</label>
+
+                  <input v-if="$route.params.id>=0" v-model="managerCustomer.telHome" class="form-control" id="inputTel" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" placeholder="418-123-4567" value="{{customers[$route.params.id].telephone}}"  type="tel" required></input>
+
+                  <input v-else value="" v-model="managerCustomer.telHome" class="form-control" id="inputTel" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" type="tel"
+                  placeholder="418-123-4567" required></input>
+
+                </li>
+                <li class="list-group-item"><label for="inputCel" class="control-label"># Cél</label>
+
+                  <input v-if="$route.params.id>=0" v-model="managerCustomer.telCel" class="form-control" id="inputCel"
+                  pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" placeholder="418-123-4567" value="{{customers[$route.params.id].cell}}" type="tel"></input>
+
+                  <input v-else value="" v-model="managerCustomer.telCel" class="form-control" id="inputCel" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" type="tel"
+                  placeholder="418-123-4567"></input>
+
+                </li>
+                <li class="list-group-item"><label for="inputEmail" class="control-label">Courriel</label>
+
+                  <input v-if="$route.params.id>=0" v-model="managerCustomer.email" type="email" class="form-control" id="inputEmail" placeholder="Courriel" data-error="courriel non valide" value="{{customers[$route.params.id].mail}}" required>
+
+                  <input v-else value="" v-model="managerCustomer.email" type="email" class="form-control" id="inputEmail" placeholder="Courriel" data-error="courriel non valide" required>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <button @click="modifyCurrentCustomer" v-if="$route.params.id>=0" class="btn btn-default" value="{{$route.params.id}}">Modifier</h1>
+    <button @click="addNewCustomer" v-else class="btn btn-default">Ajouter</button>
+  </form>
+</div>
+
