@@ -187,7 +187,7 @@ function initJquery()
         tarifDelivery.calculDelivery();
     });
 
-    $("#addCustomerForm").change(function()
+    $("#addDeliveryForm").change(function()
     {
         tarifDelivery.calculDelivery();
     });
