@@ -45,12 +45,17 @@ function calculDelivery()
         {
             return;
         }
-        //if(delivery.typeTarifRegulier === 1)
+        var selected = $("input:radio[name='radio']:checked").val();
+        if (!selected)
+            return;
+        delivery.typeTarifRegulier = selected;
+        if(delivery.typeTarifRegulier == 1)
             delivery.basePrice = datas.arrayService1[$("#customerPostalCodeZone").val()][zoneP];
-        /*if(delivery.typeTarifRegulier === 2)
+        else if(delivery.typeTarifRegulier == 2)
             delivery.basePrice = datas.arrayService2[$("#customerPostalCodeZone").val()][zoneP];
-        if(delivery.typeTarifRegulier === 3)
-            delivery.basePrice = datas.arrayService3[$("#customerPostalCodeZone").val()][zoneP];*/
+        else if(delivery.typeTarifRegulier == 3)
+            delivery.basePrice = datas.arrayService3[$("#customerPostalCodeZone").val()][zoneP];
+
         delivery.basePrice += delivery.isCOD ? datas.COD : 0;
         delivery.basePrice += delivery.isCamion ? datas.Camion : 0;
         delivery.basePrice += delivery.isAllerRetour ? delivery.basePrice : 0;

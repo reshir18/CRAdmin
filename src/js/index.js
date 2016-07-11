@@ -148,6 +148,9 @@ function initJquery()
         $('.ui-spinner-button').click(function() {
            $(this).siblings('input').change();
         });
+        $('#btn-datepicker-span').click(function() {
+           $( "#datepicker" ).focus();
+        });
         //$('.clockpicker').clockpicker();
     }
 
@@ -191,7 +194,7 @@ function initdatePickers()
         dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
         weekHeader: 'Sm',
         dateFormat: 'dd MM',
-        firstDay: 1,
+        firstDay: 0,
         isRTL: false,
         showMonthAfterYear: false,
         yearSuffix: '',

@@ -84,6 +84,10 @@
   color: #fff;
   background-color: #5bc0de;
 }
+.funkyradio-success input[type="radio"]:checked ~ label:before {
+  color: #fff;
+  background-color: #5cb85c;
+}
 .material-switch > input[type="checkbox"] {
   display: none;
 }
