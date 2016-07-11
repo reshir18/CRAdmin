@@ -28,7 +28,6 @@ require('bootstrap');
 require('jquery-ui');
 var tarifDelivery = require('./tarifDelivery.js');
 var managerCustomer = require('./managerCustomer.js');
-var modifyCustomerIndex = 0;
 
 
 var Home = Vue.extend({
@@ -49,11 +48,14 @@ var customerMenu = Vue.extend({
     addNewCustomer: function (event) {
         if(managerCustomer.addCustomerFunction(this.$data.managerCustomer))
         {
-            let postalZone = Util.getPostalZone(this.$data.managerCustomer.postalCode1.toUpperCase());
+            router.go({ name: 'home'});
         }
     },
     modifyCurrentCustomer : function(event){
-        managerCustomer.modifyCustomerFunction(this.$data.managerCustomer, event.target.value)
+        if(managerCustomer.modifyCustomerFunction(this.$data.managerCustomer, event.target.value))
+        {
+            router.go({ name: 'home'});
+        }
     }
   }
 })
@@ -108,7 +110,8 @@ router.map({
         name: 'customer',
         component: customerMenu
     },
-    '/deliveryAdd' : {
+    '/deliveryAdd/:id' : {
+        name:'delivery',
         component: DeliveryAdd
     }
 })

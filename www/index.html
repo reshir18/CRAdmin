@@ -47,7 +47,7 @@
                   <ul class="nav navbar-nav navbar-right">
                     <li><a v-link="{ name: 'home', path: '/home' }"><span class="glyphicon glyphicon-home"></span>&nbsp;Accueil</a></li>
                     <li><a v-link="{ name: 'customer', path: '/customerMenu', params: { id: -1 } }"><span class="glyphicon glyphicon-user"></span>&nbsp;Nouveau client</a></li>
-                    <li><a v-link="{ path: '/deliveryAdd' }"><span class="glyphicon glyphicon-road"></span>&nbsp;Nouvelle livraison</a></li>
+                    <li><a v-link="{ name: 'delivery', path: '/deliveryAdd', params: { id: -1 }}"><span class="glyphicon glyphicon-road"></span>&nbsp;Nouvelle livraison</a></li>
                     <li><a v-link="{ path: '/admin' }"><span class="glyphicon glyphicon-cog"></span>&nbsp;Administration</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->

@@ -22,7 +22,9 @@ function modifyCustomerFunction(customer, idx)
 	if(validate(customer))
 	{
 		modifyCustomer(customer, idx);
+		return true;
 	}
+	return false;
 }
 
 function validate(customer)

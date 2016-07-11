@@ -12,7 +12,10 @@
                   <option>Choisir un client</option>
                   <div id="customers">
                   <template v-for="cus in customers">
-                    <option class="item-{{$index}}">
+                    <option v-if="$route.params.id === -1" class="item-{{$index}}" selected>
+                      {{cus.id}} : {{cus.name}} {{cus.lastName}} - selected
+                    </option>
+                    <option v-else class="item-{{$index}}">
                       {{cus.id}} : {{cus.name}} {{cus.lastName}}
                     </option>
                   </template>
