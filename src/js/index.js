@@ -145,6 +145,9 @@ function initJquery()
     {
         $( "#datepicker" ).datepicker();
         $( ".spinnerCR" ).spinner();
+        $('.ui-spinner-button').click(function() {
+           $(this).siblings('input').change();
+        });
         //$('.clockpicker').clockpicker();
     }
 
