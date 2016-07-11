@@ -18,6 +18,7 @@
  */
 var jQuery = $ = require('jquery');
 var Vue = require("vue");
+var Util = require("./util.js");
 var VueRouter = require('vue-router');
 var datas = require('./datas.js');
 var customers = require('./customers.js').customers;
@@ -26,13 +27,28 @@ Vue.use(VueRouter);
 require('bootstrap');
 require('jquery-ui');
 var tarifDelivery = require('./tarifDelivery.js');
+var newCustomer = require('./newCustomer.js');
 
 
 var Home = Vue.extend({template: '<p>This is foo!</p>'})
 
 var CustomerAdd = Vue.extend({
     template: require("../pages/customerAdd.html"),
-    data: function () {return {datas : datas}}
+    data: function () {return {datas : datas, customers : customers, newCustomer : newCustomer}},
+    methods: {
+    addNewCustomer: function (event) {
+        if(newCustomer.addCustomerFunction(this.$data.newCustomer))
+        {
+            let postalZone = Util.getPostalZone(this.$data.newCustomer.postalCode1.toUpperCase());
+            alert(postalZone);
+        }
+            /*alert(this.$data.newCustomer.postalCodeZone);
+        }
+        else
+            alert("NOPE");*/
+      // `event` is the native DOM event
+    }
+  }
 })
 var DeliveryAdd = Vue.extend({
     template: require("../pages/deliveryAdd.html"),
