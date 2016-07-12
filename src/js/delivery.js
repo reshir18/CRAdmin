@@ -13,6 +13,7 @@ module.exports ={
 	isCOD : false,
 	idCustomer : 0,
 	typeTarifRegulier : 0,
+	nbHeures : 0,
 	adresseD : "",
 	postalCodeD : "",
 	nameD : ""

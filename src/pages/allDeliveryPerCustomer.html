@@ -15,20 +15,24 @@
 	<div class="delivery-{{$index}} well well-lg row" >
 		<div class="col-md-9">
 			<div class= "row">
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class= "row">
 						{{$index + 1}} - Date : <strong>{{del.date}}</strong>
 					</div>
 					<div class= "row">
 						<template v-if="del.isTarifHeure">
-							Tarification: <strong>à l'heure</strong>
+							Tarification: <strong>à l'heure - {{del.nbHeures}} heure(s)</strong>
 						</template>
 						<template v-else>
-							Tarification: <strong>régulière</strong>
+							Tarification: <strong>régulière - Service: </strong>
+							<strong v-if="del.typeTarifRegulier == '1'">1 heure</strong>
+							<strong v-if="del.typeTarifRegulier == '2'">2-3 heures</strong>
+							<strong v-if="del.typeTarifRegulier == '3'">même jour</strong>
+							<strong v-if="del.typeTarifRegulier == '4'">lendemain</strong>
 						</template>
 					</div>
 				</div>
-				<div class="col-md-9">
+				<div class="col-md-7">
 					<div class= "row">
 						Destinataire: <strong>{{del.nameD}}</strong>
 					</div>
