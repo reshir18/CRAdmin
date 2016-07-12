@@ -39,8 +39,6 @@ var Home = Vue.extend({
         },
         addDeliveryFunction: function (event) {
             router.go({ name: 'delivery', params: { id: event.target.value }});
-            $( "#customerPostalCodeDisplay" ).html(customers[event.target.value - 2].postalCode);
-            $( "#customerPostalCodeZone" ).val(customers[event.target.value - 2].zone);
         }
     }
 })
@@ -66,7 +64,7 @@ var customerMenu = Vue.extend({
 var DeliveryAdd = Vue.extend({
     template: require("../pages/deliveryAdd.html"),
     data: function () {return {datas : datas, customers : customers}},
-    ready: function (done) {initJquery()},
+    ready: function (done) {initSelectCustomer();},
     methods: {
     addNewDelivery: function (event) {
 
@@ -166,7 +164,18 @@ $(document).ready(function() {
     //document.getElementById("inputPostalCode").setAttribute('style', 'text-transform:uppercase;');
     //$('#addCustomerForm').validator();
 });
-
+function initSelectCustomer()
+{
+    let idx = $( "#selectCustomerDDL" )[0].selectedIndex;
+    if(idx >= 0)
+    {
+        $( "#customerPostalCodeDisplay" ).html(customers[idx - 1].postalCode);
+        $( "#customerPostalCodeZone" ).val(customers[idx - 1].zone);
+    }
+    initJquery();
+    /*$( "#customerPostalCodeDisplay" ).html("Code postal du client");
+    $( "#customerPostalCodeZone" ).val("12");*/
+}
 function initJquery()
 {
     initdatePickers();

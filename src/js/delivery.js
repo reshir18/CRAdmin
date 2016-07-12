@@ -1,4 +1,5 @@
 module.exports ={
+	date:"01 juin",
 	basePrice : 0.00,
 	gazPrice : 0.00,
 	taxesPrice : 0.00,
@@ -12,7 +13,7 @@ module.exports ={
 	isCOD : false,
 	idClient : 0,
 	typeTarifRegulier : 0,
-	adresseD : "adresse",
+	adresseD : "address",
 	postalCodeD : "A1A1A1",
 	nameD : "name"
 }
