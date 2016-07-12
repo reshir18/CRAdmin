@@ -1,11 +1,15 @@
 var delivery = require("./delivery.js");
 var Util = require("./util.js");
 var datas = require('./datas.js');
+var allDelivery = require("./allDelivery.js").allDeliverys;
+var customers = require('./customers.js').customers;
 
 module.exports = {
     addAmount: addAmount,
     addTaxes: addTaxes,
-    calculDelivery : calculDelivery
+    calculDelivery : calculDelivery,
+    addDeliveryToCustomer : addDeliveryToCustomer,
+    sortDeliverForCustomer : sortDeliverForCustomer
 }
 
 function addAmount()
@@ -22,6 +26,32 @@ function addTaxes()
     delivery.gazPrice = Util.roundToTwo(delivery.gazPrice);
     delivery.taxesPrice = Util.roundToTwo(delivery.taxesPrice);
     delivery.totalDelivery = Util.roundToTwo(delivery.basePrice + delivery.gazPrice + delivery.taxesPrice);
+}
+
+function addDeliveryToCustomer(deliveryObj, idx)
+{
+    let id = customers[idx].id
+    let fullPostalCode = (deliveryObj.codeP1 + " " + deliveryObj.codeP2).toUpperCase();
+    let objTemp = Object.assign({}, deliveryObj);
+    allDelivery.push(objTemp);
+    allDelivery[allDelivery.length -1].idDelivery = allDelivery.length;
+    allDelivery[allDelivery.length -1].idCustomer = id;
+    allDelivery[allDelivery.length -1].postalCodeD = fullPostalCode;
+    customers[idx].nbDeliverys++;
+}
+
+function sortDeliverForCustomer(idCus)
+{
+    let arrayTemp = [];
+    for(let i = 0; i < allDelivery.length; i++)
+    {
+        if(allDelivery[i].idCustomer === idCus)
+        {
+            arrayTemp.push(allDelivery[i]);
+        }
+    }
+    arrayTemp.sort(function(a, b){return new Date(a.date) - new Date(b.date)});
+    return arrayTemp;
 }
 
 function changeTypeTarifRegulier(myRadio)

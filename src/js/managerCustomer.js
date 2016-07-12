@@ -89,6 +89,7 @@ function createCustomer(customer)
 		telephone: customer.telHome,
 		cell : customer.telCel ? customer.telCel : "---",
 		mail : customer.email,
+		nbDeliverys : 0,
 	}
 	customers.push(objTemp);
 }
@@ -108,6 +109,7 @@ function modifyCustomer(customer, idx)
 		telephone: customer.telHome,
 		cell : customer.telCel ? customer.telCel : "---",
 		mail : customer.email,
+		nbDeliverys : customer.nbDeliverys,
 	}
 	customers[idx] = objTemp;
 }

@@ -1,10 +1,10 @@
-<div class="panel panel-info">
+<div class="panel panel-success">
 	<ul class="list-group">
 		<li class="list-group-item">
 		    <div class="well well-sm">
 		    	<strong>Prix de la livraison : </strong>
 		    	<div class="pull-right">
-		    		<strong id="totalPriceDelivery">{{data.basePrice}} $</strong>
+		    		<strong id="totalPriceDelivery">{{delivery.basePrice}} $</strong>
 				</div>
 		    </div>
 		</li>
@@ -12,7 +12,7 @@
 		    <div class="well well-sm">
 		    	<strong>Surcharge d'essence : </strong>
 		    	<div class="pull-right">
-		    		<strong id="priceGaz">{{data.gazPrice}} $</strong>
+		    		<strong id="priceGaz">{{delivery.gazPrice}} $</strong>
 				</div>
 		    </div>
 		</li>
@@ -20,7 +20,7 @@
 		    <div class="well well-sm">
 		    	<strong>Montant des taxes : </strong>
 		    	<div class="pull-right">
-		    		<strong id="priceTaxes">{{data.taxesPrice}} $</strong>
+		    		<strong id="priceTaxes">{{delivery.taxesPrice}} $</strong>
 				</div>
 		    </div>
 		</li>
@@ -28,7 +28,7 @@
 		    <div class="well well-lg">
 		    	<strong>Grand total : </strong>
 		    	<div class="pull-right">
-		    		<strong id="total">{{data.totalDelivery}} $</strong>
+		    		<strong id="total">{{delivery.totalDelivery}} $</strong>
 				</div>
 		    </div>
 		</li>

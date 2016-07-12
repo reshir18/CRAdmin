@@ -28,17 +28,25 @@ require('bootstrap');
 require('jquery-ui');
 var tarifDelivery = require('./tarifDelivery.js');
 var managerCustomer = require('./managerCustomer.js');
+var allDelivery = require("./allDelivery.js").allDeliverys;
+let deliveryListCustomer = [];
+let currentCustomer = null;
 
 
 var Home = Vue.extend({
     template: require("../pages/home.html"),
-    data: function () {return {customers : customers}},
+    data: function () {return {customers : customers, allDelivery : allDelivery}},
     methods: {
         modifyCustomerFunction: function (event) {
             router.go({ name: 'customer', params: { id: event.target.value }});
         },
         addDeliveryFunction: function (event) {
             router.go({ name: 'delivery', params: { id: event.target.value }});
+        },
+        showAllDeliveryFunction : function (event) {
+            currentCustomer = customers[event.target.value];
+            deliveryListCustomer = tarifDelivery.sortDeliverForCustomer(currentCustomer.id);
+            router.go({ name: 'deliverySummary', params: { id: event.target.value }});
         }
     }
 })
@@ -61,26 +69,37 @@ var customerMenu = Vue.extend({
     }
   }
 })
+
 var DeliveryAdd = Vue.extend({
     template: require("../pages/deliveryAdd.html"),
-    data: function () {return {datas : datas, customers : customers}},
+    data: function () {return {datas : datas, customers : customers, delivery: delivery}},
     ready: function (done) {initSelectCustomer();},
     methods: {
     addNewDelivery: function (event) {
-
+        tarifDelivery.addDeliveryToCustomer(this.$data.delivery, [$( "#selectCustomerDDL" )[0].selectedIndex - 1]);
     }
   }
 })
+
 var Admin = Vue.extend({
     template:  require("../pages/admin.html"),
     data: function () {return {datas : datas}},
     ready: function (done) {initJquery()}
 })
-var vueTarifRegulierComponent = Vue.extend({template: require("../components/tarifRegulier.html")});
+
+var AllDelivery = Vue.extend({
+    template:  require("../pages/allDeliveryPerCustomer.html"),
+    data: function () {return {delivery : deliveryListCustomer, customer : currentCustomer}}
+})
+
+var vueTarifRegulierComponent = Vue.extend({
+    template: require("../components/tarifRegulier.html"),
+    data: function () {return {delivery: delivery}}
+});
 var vueAllCustomersComponent = Vue.extend({template: require("../components/listAllCustomers.html")})
 var vueTotalLivraisonComponent = Vue.extend({
     template: require("../components/totalLivraison.html"),
-    data: function () {return {data : delivery}}
+    data: function () {return {delivery : delivery}}
 })
 Vue.component('tarif-reg', vueTarifRegulierComponent);
 Vue.component('list-customers-all', vueAllCustomersComponent);
@@ -115,6 +134,10 @@ router.map({
     '/deliveryAdd/:id' : {
         name:'delivery',
         component: DeliveryAdd
+    },
+    '/deliverysSummary/:id' : {
+        name:'deliverySummary',
+        component: AllDelivery
     }
 })
 
@@ -167,7 +190,7 @@ $(document).ready(function() {
 function initSelectCustomer()
 {
     let idx = $( "#selectCustomerDDL" )[0].selectedIndex;
-    if(idx >= 0)
+    if(idx > 0)
     {
         $( "#customerPostalCodeDisplay" ).html(customers[idx - 1].postalCode);
         $( "#customerPostalCodeZone" ).val(customers[idx - 1].zone);
@@ -242,7 +265,7 @@ function initdatePickers()
         dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
         dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
         weekHeader: 'Sm',
-        dateFormat: 'dd MM',
+        dateFormat: 'dd/mm/yy',
         firstDay: 0,
         isRTL: false,
         showMonthAfterYear: false,

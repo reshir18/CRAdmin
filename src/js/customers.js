@@ -11,6 +11,7 @@ module.exports ={
 			telephone: "418-380-3790",
 			cell : "---",
 			mail : "michael.raymond76@gmail.com",
+			nbDeliverys : 1,
 		},
 		{
 			id: 2,
@@ -23,6 +24,7 @@ module.exports ={
 			telephone: "418-380-3790",
 			cell : "---",
 			mail : "michael.raymond76@gmail.com",
+			nbDeliverys : 0,
 		}
 
 	]

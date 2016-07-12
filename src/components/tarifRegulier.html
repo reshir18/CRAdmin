@@ -5,19 +5,19 @@
 			<div class="panel-heading">Service</div>
 			<div class="funkyradio">
 				<div class="funkyradio-success">
-		            <input type="radio"  value="1" name="radio" id="radioService1" class="radioButtonService" />
+		            <input type="radio"  value="1" name="radio" id="radioService1" v-model="delivery.typeTarifRegulier" class="radioButtonService" />
 		            <label for="radioService1">1 Heure</label>
 		        </div>
 				<div class="funkyradio-success">
-		            <input type="radio"  value="2" name="radio" id="radioService2" class="radioButtonService" />
+		            <input type="radio"  value="2" name="radio" id="radioService2" v-model="delivery.typeTarifRegulier" class="radioButtonService" />
 		            <label for="radioService2">2-3 Heures</label>
 		        </div>
 				<div class="funkyradio-success">
-		            <input type="radio"  value="3" name="radio" id="radioService3" class="radioButtonService" />
+		            <input type="radio"  value="3" name="radio" id="radioService3" v-model="delivery.typeTarifRegulier" class="radioButtonService" />
 		            <label for="radioService3">Même jour</label>
 		        </div>
 				<div class="funkyradio-success">
-		            <input type="radio"  value="1" name="radio" id="radioService4" class="radioButtonService" />
+		            <input type="radio"  value="4" name="radio" id="radioService4" v-model="delivery.typeTarifRegulier" class="radioButtonService" />
 		            <label for="radioService4">Lendemain</label>
 		        </div>
 			</div>
@@ -32,21 +32,21 @@
 				<li class="list-group-item">
 				    C.O.D
 				    <div class="material-switch pull-right">
-				        <input id="cbxCOD" onclick="addAmount();" name="cbxCOD" type="checkbox" class="radioButtonFraisSup"/>
+				        <input id="cbxCOD" onclick="addAmount();" name="cbxCOD" v-model="delivery.isCOD" type="checkbox" class="radioButtonFraisSup"/>
 				        <label for="cbxCOD" class="label-success"></label>
 				    </div>
 				</li>
 				<li class="list-group-item">
 				    Frais de camion
 				    <div class="material-switch pull-right">
-				        <input id="cbxCamion" onclick="addAmount();" name="cbxCamion" type="checkbox" class="radioButtonFraisSup"/>
+				        <input id="cbxCamion" onclick="addAmount();" name="cbxCamion" v-model="delivery.isCamion" type="checkbox" class="radioButtonFraisSup"/>
 				        <label for="cbxCamion" class="label-success"></label>
 				    </div>
 				</li>
 				<li class="list-group-item">
 				    Aller retour
 				    <div class="material-switch pull-right">
-				        <input id="cbxAllerRetour" onclick="addAmount()" name="cbxAllerRetour" type="checkbox" class="radioButtonFraisSup"/>
+				        <input id="cbxAllerRetour" onclick="addAmount()" name="cbxAllerRetour" v-model="delivery.isAllerRetour" type="checkbox" class="radioButtonFraisSup"/>
 				        <label for="cbxAllerRetour" class="label-success"></label>
 				    </div>
 				</li>
@@ -61,19 +61,19 @@
 				<div class="row well-sm">
 				    Poids sup.
 				    <div class="pull-right">
-				        <input class="spinnerCR"id="inputNBPoundsPlus" min="0" value="0"  required></input>
+				        <input v-model="delivery.nbLbsPlus" class="spinnerCR" id="inputNBPoundsPlus" min="0" value="0"  required></input>
 				    </div>
 				</div>
 				<div class="row well-sm">
 				    Temps d'attente sup.
 				    <div class="pull-right">
-				       <input class="spinnerCR" id="inputNBMinutesWaitPlus" min="0" value="0"  required></input>
+				       <input v-model="delivery.nbMinutesWaitPlus" class="spinnerCR" id="inputNBMinutesWaitPlus" min="0" value="0"  required></input>
 				    </div>
 				</div>
 				<div class="row well-sm">
 				    Temps de recherche sup.
 				    <div class="pull-right">
-				        <input class="spinnerCR"id="inputNBMinutesFindPlus" min="0" value="0"  required></input>
+				        <input v-model="delivery.nbMinutesFindPlus" class="spinnerCR" id="inputNBMinutesFindPlus" min="0" value="0"  required></input>
 				    </div>
 				</div>
 			</div>

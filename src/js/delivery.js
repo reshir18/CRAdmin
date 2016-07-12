@@ -1,5 +1,5 @@
 module.exports ={
-	date:"01 juin",
+	date:"",
 	basePrice : 0.00,
 	gazPrice : 0.00,
 	taxesPrice : 0.00,
@@ -11,9 +11,9 @@ module.exports ={
 	isAllerRetour : false,
 	isCamion : false,
 	isCOD : false,
-	idClient : 0,
+	idCustomer : 0,
 	typeTarifRegulier : 0,
-	adresseD : "address",
-	postalCodeD : "A1A1A1",
-	nameD : "name"
+	adresseD : "",
+	postalCodeD : "",
+	nameD : ""
 }
