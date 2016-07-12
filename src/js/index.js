@@ -35,10 +35,14 @@ var Home = Vue.extend({
     data: function () {return {customers : customers}},
     methods: {
         modifyCustomerFunction: function (event) {
-            modifyCustomerIndex = event.target.value;
             router.go({ name: 'customer', params: { id: event.target.value }});
+        },
+        addDeliveryFunction: function (event) {
+            router.go({ name: 'delivery', params: { id: event.target.value }});
+            $( "#customerPostalCodeDisplay" ).html(customers[event.target.value - 2].postalCode);
+            $( "#customerPostalCodeZone" ).val(customers[event.target.value - 2].zone);
         }
-    },
+    }
 })
 
 var customerMenu = Vue.extend({
