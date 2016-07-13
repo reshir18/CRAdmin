@@ -76,7 +76,15 @@ var DeliveryAdd = Vue.extend({
     ready: function (done) {initSelectCustomer();},
     methods: {
     addNewDelivery: function (event) {
-        tarifDelivery.addDeliveryToCustomer(this.$data.delivery, [$( "#selectCustomerDDL" )[0].selectedIndex - 1]);
+        let msgError = tarifDelivery.addDeliveryToCustomer(this.$data.delivery, $( "#selectCustomerDDL" )[0].selectedIndex - 1);
+        if(msgError != null)
+        {
+            alert(msgError);
+        }
+        else
+        {
+            router.go({name: 'home'});
+        }
     }
   }
 })
@@ -97,12 +105,7 @@ var vueTarifRegulierComponent = Vue.extend({
     data: function () {return {delivery: delivery, otherFee:{name:"", cost:0.00}}},
     methods: {
     addNewOtherFee: function (event) {
-        //alert();
         tarifDelivery.addOtherFeeToDelivery(this.$data.delivery, this.$data.otherFee)
-    },
-    removeOtherFee : function(feeRemove)
-    {
-        alert(feeRemove);
     }
   }
 });

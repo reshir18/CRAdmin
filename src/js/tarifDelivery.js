@@ -3,6 +3,8 @@ var Util = require("./util.js");
 var datas = require('./datas.js');
 var allDelivery = require("./allDelivery.js").allDeliverys;
 var customers = require('./customers.js').customers;
+let arrayErrorMessage = ["Un client doit être choisi", "Le nom et/ou l'adresse du destinataire sont non valides" ,
+ "Le code postal du destinataire est non valide", "Le cout de la livraison doit être supérieur à zéro"];
 
 module.exports = {
     addAmount: addAmount,
@@ -31,14 +33,33 @@ function addTaxes()
 
 function addDeliveryToCustomer(deliveryObj, idx)
 {
-    let id = customers[idx].id
-    let fullPostalCode = (deliveryObj.codeP1 + " " + deliveryObj.codeP2).toUpperCase();
-    let objTemp = Object.assign({}, deliveryObj);
-    allDelivery.push(objTemp);
-    allDelivery[allDelivery.length -1].idDelivery = allDelivery.length;
-    allDelivery[allDelivery.length -1].idCustomer = id;
-    allDelivery[allDelivery.length -1].postalCodeD = fullPostalCode;
-    customers[idx].nbDeliverys++;
+    if(idx < 0)
+        return arrayErrorMessage[0];
+    let fullPostalCode = (delivery.codeP1 + " " + delivery.codeP2).toUpperCase();
+    if(fullPostalCode.length < 7)
+        return arrayErrorMessage[2];
+
+    let errorMessage = validateDelivery(delivery);
+    if( errorMessage == null)
+    {
+        let id = customers[idx].id;
+        let objTemp = Object.assign({}, delivery);
+        allDelivery.push(objTemp);
+        allDelivery[allDelivery.length -1].idDelivery = allDelivery.length;
+        allDelivery[allDelivery.length -1].idCustomer = id;
+        allDelivery[allDelivery.length -1].postalCodeD = fullPostalCode;
+        customers[idx].nbDeliverys++;
+        return null;
+    }
+    return errorMessage;
+}
+
+function validateDelivery(deliveryObj)
+{
+    if(!delivery.adresseD || !delivery.nameD)
+        return arrayErrorMessage[1];
+    if(delivery.basePrice <= 0)
+        return arrayErrorMessage[3];
 }
 
 function sortDeliverForCustomer(idCus)
@@ -59,13 +80,18 @@ function addOtherFeeToDelivery(deliveryObj, fee)
 {
     if(fee.cost && fee.name && !isNaN(fee.cost))
     {
-        deliveryObj.otherFee.push(Object.assign({}, fee));
-        deliveryObj.basePrice += parseFloat(fee.cost);
-        $( "#panelOtherFee" ).append( "<button class=\" btn btn-success btn-xs\" id = \" otherFee"+fee.name+fee.cost+"\"type=\"button\"><span class=\"glyphicon glyphicon-trash\"></span>&nbsp;"
-        + fee.name + " : " + fee.cost + "$</button> ");
-        $(".removeFee").click(function()
+        let objTemp = Object.assign({}, fee)
+        objTemp.cost = Util.roundToTwo(parseFloat(objTemp.cost));
+        delivery.otherFee.push(objTemp);
+        delivery.basePrice += objTemp.cost;
+        $( "#panelOtherFee" ).append( "<button class=\" otherFee btn btn-success btn-xs\" type=\"button\"><span class=\"glyphicon glyphicon-trash\"></span>&nbsp;"
+        + objTemp.name + " : " + objTemp.cost + "$</button> ");
+        $(".otherFee").click(function()
         {
-            removeOtherFeeToDelivery(fee);
+            if(this && this.parentNode && this.parentNode.removeChild(this))
+            {
+                removeOtherFeeToDelivery(objTemp);
+            }
         });
         calculDelivery();
     }
@@ -73,13 +99,19 @@ function addOtherFeeToDelivery(deliveryObj, fee)
 
 function removeOtherFeeToDelivery(fee)
 {
+    let index = -1;
     for(let i = 0; i < delivery.otherFee.length; i++)
     {
         if(delivery.otherFee[i].cost == fee.cost && delivery.otherFee[i].name == fee.name)
         {
-            //remove from array
-
+            index = i;
+            break;
         }
+    }
+    if(index > -1)
+    {
+        delivery.otherFee.splice(index, 1);
+        calculDelivery();
     }
 }
 
@@ -127,4 +159,30 @@ function calculDelivery()
         delivery.basePrice = Util.roundToTwo(delivery.basePrice);
         addTaxes();
     }
+}
+
+function resetDelivery(deliveryObj)
+{
+    deliveryObjTemp = {
+        date:"",
+        basePrice : 0.00,
+        gazPrice : 0.00,
+        taxesPrice : 0.00,
+        totalDelivery : 0.00,
+        nbLbsPlus : 0,
+        nbMinutesWaitPlus : 0,
+        nbMinutesFindPlus : 0,
+        isTarifHeure : false,
+        isAllerRetour : false,
+        isCamion : false,
+        isCOD : false,
+        idCustomer : 0,
+        typeTarifRegulier : 0,
+        nbHeures : 0,
+        otherFee :[],
+        adresseD : "",
+        postalCodeD : "",
+        nameD : ""
+    }
+    delivery = deliveryObjTemp;
 }
