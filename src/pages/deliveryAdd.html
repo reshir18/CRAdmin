@@ -37,13 +37,13 @@
               <div class="col-md-4">
                 <label for="inputNameA" class="control-label">Nom</label>
                 <div class="input-group col-md-8">
-                      <input class="form-control" v-model="delivery.nameD" id="inputNameA" type="text" required></input>
+                      <input class="form-control" v-model="delivery.nameD" id="inputNameA" value="" type="text" required></input>
                 </div>
               </div>
               <div class="col-md-5">
                 <label for="inputPostalCodeA" class="control-label">Adresse</label>
                 <div class="input-group col-md-10">
-                      <input class="form-control" v-model="delivery.adresseD" id="inputAdresseA" type="text" required></input>
+                      <input class="form-control" v-model="delivery.adresseD" id="inputAdresseA" value="" type="text" required></input>
                 </div>
               </div>
               <div class="col-md-3">
@@ -51,13 +51,13 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="input-group">
-                      <input class="form-control" v-model="delivery.codeP1" maxlength="3" placeholder = "A1A" pattern = "[A-Za-z][0-9][A-Za-z]" id="inputPostalCodeA" type="text" required
+                      <input class="form-control" v-model="delivery.codeP1" maxlength="3" value="" placeholder = "A1A" pattern = "[A-Za-z][0-9][A-Za-z]" id="inputPostalCodeA" type="text" required
                       style="text-transform:uppercase"></input>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="input-group">
-                      <input class="form-control" v-model="delivery.codeP2" maxlength="3" placeholder = "1A1" pattern = "[0-9][A-Za-z][0-9]" id="inputPostalCodeA2" type="text" required
+                      <input class="form-control" v-model="delivery.codeP2" maxlength="3" value="" placeholder = "1A1" pattern = "[0-9][A-Za-z][0-9]" id="inputPostalCodeA2" type="text" required
                       style="text-transform:uppercase"></input>
                     </div>
                   </div>
@@ -72,7 +72,7 @@
             <div class="panel-heading"><h3 class="panel-title">Tarification</h3></div>
             <div class="panel-body inline">
               <div id="tab" class="btn-group" data-toggle="buttons-radio">
-                <a href="#regPanel" class="btn btn-large btn-success" id = "btnRadioTypeTarificationReg" data-toggle="tab">Réguilère</a>
+                <a href="#regPanel" class="btn btn-large btn-success" id = "btnRadioTypeTarificationReg" selected data-toggle="tab">Réguilère</a>
                 <a href="#hourPanel" class="btn btn-large btn-success" id = "btnRadioTypeTarificationHeure" data-toggle="tab">À l'heure</a>
               </div>
             </div>
@@ -84,7 +84,7 @@
             <div class="panel-heading"><h3 class="panel-title">Date et heure</h3></div>
             <div class="panel-body inline">
               <div class="input-group clockpicker">
-                <input type="text" class="form-control col-md-6" value="09:30">
+                <input type="text" class="form-control col-md-6" value="">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>

@@ -34,6 +34,7 @@ let currentCustomer = null;
 
 
 var Home = Vue.extend({
+    ready: function (done) {document.title = "Accueil";},
     template: require("../pages/home.html"),
     data: function () {return {customers : customers, allDelivery : allDelivery}},
     methods: {
@@ -41,10 +42,12 @@ var Home = Vue.extend({
             router.go({ name: 'customer', params: { id: event.target.value }});
         },
         addDeliveryFunction: function (event) {
+            document.title = "Nouvelle livraison";
             router.go({ name: 'delivery', params: { id: event.target.value }});
         },
         showAllDeliveryFunction : function (event) {
             currentCustomer = customers[event.target.value];
+            document.title = "Livraisons de " + currentCustomer.name + " " + currentCustomer.lastName;
             deliveryListCustomer = tarifDelivery.sortDeliverForCustomer(currentCustomer.id);
             router.go({ name: 'deliverySummary', params: { id: event.target.value }});
         }
@@ -52,6 +55,7 @@ var Home = Vue.extend({
 })
 
 var customerMenu = Vue.extend({
+    ready: function (done) {document.title = "Client";},
     template: require("../pages/customerMenu.html"),
     data: function () {return {datas : datas, customers : customers, managerCustomer : managerCustomer}},
     methods: {
@@ -73,7 +77,7 @@ var customerMenu = Vue.extend({
 var DeliveryAdd = Vue.extend({
     template: require("../pages/deliveryAdd.html"),
     data: function () {return {datas : datas, customers : customers, delivery: delivery}},
-    ready: function (done) {initSelectCustomer();},
+    ready: function (done) {document.title = "Nouvelle livraison"; initSelectCustomer();},
     methods: {
     addNewDelivery: function (event) {
         let msgError = tarifDelivery.addDeliveryToCustomer(this.$data.delivery, $( "#selectCustomerDDL" )[0].selectedIndex - 1);
@@ -92,7 +96,7 @@ var DeliveryAdd = Vue.extend({
 var Admin = Vue.extend({
     template:  require("../pages/admin.html"),
     data: function () {return {datas : datas}},
-    ready: function (done) {initJquery()}
+    ready: function (done) {document.title = "Administration";}
 })
 
 var AllDelivery = Vue.extend({
@@ -187,8 +191,6 @@ var app = {
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
     }
 };
 
@@ -196,8 +198,6 @@ app.initialize();
 
 $(document).ready(function() {
     initJquery();
-    //document.getElementById("inputPostalCode").setAttribute('style', 'text-transform:uppercase;');
-    //$('#addCustomerForm').validator();
 });
 function initSelectCustomer()
 {
@@ -208,8 +208,6 @@ function initSelectCustomer()
         $( "#customerPostalCodeZone" ).val(customers[idx - 1].zone);
     }
     initJquery();
-    /*$( "#customerPostalCodeDisplay" ).html("Code postal du client");
-    $( "#customerPostalCodeZone" ).val("12");*/
 }
 function initJquery()
 {
@@ -240,7 +238,6 @@ function initJquery()
         {
             $( "#datepicker" ).focus();
         });
-        //$('.clockpicker').clockpicker();
     }
 
     $( ".radioButtonFraisSup" ).change(function()
@@ -263,11 +260,6 @@ function initJquery()
     $("#addDeliveryForm").change(function()
     {
         tarifDelivery.calculDelivery();
-    });
-
-    $(".removeFee").click(function()
-    {
-        alert('@REMOVE');
     });
 }
 
@@ -296,5 +288,4 @@ function initdatePickers()
         };
         $.datepicker.setDefaults($.datepicker.regional['fr']);
     });
-
 }
