@@ -82,3 +82,27 @@
 
 
 </div>
+
+<div class="row col-md-6 col-md-offset-3">
+	<div class="panel panel-success">
+		<div class="panel-heading">Autres frais</div>
+		<div class="panel-body inline">
+			<div class="row well-sm ">
+			    Frais:
+			    <div class="pull-right input-group">
+			        <input v-model="otherFee.name" id="txtNameFee"  class="form-control" type="text"/>
+			    </div>
+			</div>
+			<div class="row well-sm ">
+			    Montant:
+			    <div class="pull-right input-group">
+			        <input v-model="otherFee.cost" id="spinnerFeeCost" class="form-control" type="text" ></input>
+			    </div>
+			</div>
+			<button @click="addNewOtherFee('54')" type="button" class="pull-right btn btn-success">
+		      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
+		    </button>
+			<div class="row" id="panelOtherFee"></div>
+		</div>
+	</div>
+</div>

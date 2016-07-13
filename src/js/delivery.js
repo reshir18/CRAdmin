@@ -14,6 +14,7 @@ module.exports ={
 	idCustomer : 0,
 	typeTarifRegulier : 0,
 	nbHeures : 0,
+	otherFee :[],
 	adresseD : "",
 	postalCodeD : "",
 	nameD : ""

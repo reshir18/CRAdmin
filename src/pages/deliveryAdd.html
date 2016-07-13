@@ -109,10 +109,10 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <div class="panel panel-success">
+                  <div v-show="delivery.date" class="panel panel-success">
                     <div class="panel-heading"><h3 class="panel-title">Tarif régulier</h3></div>
                     <div class="panel-body inline">
-                      <div v-show="delivery.date" id="tarif-reg-id"><tarif-reg></tarif-reg></div>
+                      <div  id="tarif-reg-id"><tarif-reg></tarif-reg></div>
                     </div>
                   </div>
                 </div>
@@ -123,7 +123,7 @@
 
               <div class="row">
                 <div class="col-md-4">
-                  <div class="panel panel-success">
+                  <div v-show="delivery.date" class="panel panel-success">
                     <div class="panel-heading"><h3 class="panel-title">Tarif à l'heure</h3></div>
                     <div class="panel-body inline">
                       <label for="inputNbHour" class="control-label">Nombre d'heure</label>
@@ -149,7 +149,7 @@
       </div>
    </div>
     <button @click="addNewDelivery" type="button" class="btn btn-success">
-      <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Ajouter
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
     </button>
   </form>
 </div>

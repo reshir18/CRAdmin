@@ -94,15 +94,24 @@ var AllDelivery = Vue.extend({
 
 var vueTarifRegulierComponent = Vue.extend({
     template: require("../components/tarifRegulier.html"),
-    data: function () {return {delivery: delivery}}
+    data: function () {return {delivery: delivery, otherFee:{name:"", cost:0.00}}},
+    methods: {
+    addNewOtherFee: function (event) {
+        //alert();
+        tarifDelivery.addOtherFeeToDelivery(this.$data.delivery, this.$data.otherFee)
+    },
+    removeOtherFee : function(feeRemove)
+    {
+        alert(feeRemove);
+    }
+  }
 });
-var vueAllCustomersComponent = Vue.extend({template: require("../components/listAllCustomers.html")})
+//var vueAllCustomersComponent = Vue.extend({template: require("../components/listAllCustomers.html")})
 var vueTotalLivraisonComponent = Vue.extend({
     template: require("../components/totalLivraison.html"),
     data: function () {return {delivery : delivery}}
 })
 Vue.component('tarif-reg', vueTarifRegulierComponent);
-Vue.component('list-customers-all', vueAllCustomersComponent);
 Vue.component('total-livraison', vueTotalLivraisonComponent);
 
 // The router needs a root component to render.
@@ -223,6 +232,11 @@ function initJquery()
         $('#btn-datepicker-span').click(function() {
            $( "#datepicker" ).focus();
         });
+
+        $("#datepicker").change(function()
+        {
+            $( "#datepicker" ).focus();
+        });
         //$('.clockpicker').clockpicker();
     }
 
@@ -247,30 +261,35 @@ function initJquery()
     {
         tarifDelivery.calculDelivery();
     });
+
+    $(".removeFee").click(function()
+    {
+        alert('@REMOVE');
+    });
 }
 
 function initdatePickers()
 {
     jQuery(function($){
         $.datepicker.regional['fr'] = {
-        closeText: 'Fermer',
-        prevText: '&#x3c;Préc',
-        nextText: 'Suiv&#x3e;',
-        currentText: 'Aujourd\'hui',
-        monthNames: ['Janvier','Fevrier','Mars','Avril','Mai','Juin',
-        'Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
-        monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jun',
-        'Jul','Aou','Sep','Oct','Nov','Dec'],
-        dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-        dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
-        dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
-        weekHeader: 'Sm',
-        dateFormat: 'dd/mm/yy',
-        firstDay: 0,
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: '',
-        showButtonPanel: true
+            closeText: 'Fermer',
+            prevText: '&#x3c;Préc',
+            nextText: 'Suiv&#x3e;',
+            currentText: 'Aujourd\'hui',
+            monthNames: ['Janvier','Fevrier','Mars','Avril','Mai','Juin',
+            'Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
+            monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jun',
+            'Jul','Aou','Sep','Oct','Nov','Dec'],
+            dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+            dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
+            dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            showButtonPanel: true
         };
         $.datepicker.setDefaults($.datepicker.regional['fr']);
     });

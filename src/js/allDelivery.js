@@ -16,6 +16,7 @@ module.exports ={
 		idCustomer : 1,
 		typeTarifRegulier : '1',
 		nbHeures : 0,
+		otherFee :[],
 		adresseD : "3162 rue des verdiers",
 		postalCodeD : "G3A 1A1",
 		nameD : "Elvis Wong",

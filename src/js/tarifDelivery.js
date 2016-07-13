@@ -9,7 +9,8 @@ module.exports = {
     addTaxes: addTaxes,
     calculDelivery : calculDelivery,
     addDeliveryToCustomer : addDeliveryToCustomer,
-    sortDeliverForCustomer : sortDeliverForCustomer
+    sortDeliverForCustomer : sortDeliverForCustomer,
+    addOtherFeeToDelivery : addOtherFeeToDelivery
 }
 
 function addAmount()
@@ -54,9 +55,32 @@ function sortDeliverForCustomer(idCus)
     return arrayTemp;
 }
 
-function changeTypeTarifRegulier(myRadio)
+function addOtherFeeToDelivery(deliveryObj, fee)
 {
-    delivery.typeTarifRegulier = myRadio.value;
+    if(fee.cost && fee.name && !isNaN(fee.cost))
+    {
+        deliveryObj.otherFee.push(Object.assign({}, fee));
+        deliveryObj.basePrice += parseFloat(fee.cost);
+        $( "#panelOtherFee" ).append( "<button class=\" btn btn-success btn-xs\" id = \" otherFee"+fee.name+fee.cost+"\"type=\"button\"><span class=\"glyphicon glyphicon-trash\"></span>&nbsp;"
+        + fee.name + " : " + fee.cost + "$</button> ");
+        $(".removeFee").click(function()
+        {
+            removeOtherFeeToDelivery(fee);
+        });
+        calculDelivery();
+    }
+}
+
+function removeOtherFeeToDelivery(fee)
+{
+    for(let i = 0; i < delivery.otherFee.length; i++)
+    {
+        if(delivery.otherFee[i].cost == fee.cost && delivery.otherFee[i].name == fee.name)
+        {
+            //remove from array
+
+        }
+    }
 }
 
 function calculDelivery()
@@ -85,6 +109,11 @@ function calculDelivery()
             delivery.basePrice = datas.arrayService2[$("#customerPostalCodeZone").val()][zoneP];
         else if(delivery.typeTarifRegulier == 3)
             delivery.basePrice = datas.arrayService3[$("#customerPostalCodeZone").val()][zoneP];
+
+        for(let i = 0; i < delivery.otherFee.length; i++)
+        {
+            delivery.basePrice += parseFloat(delivery.otherFee[i].cost);
+        }
 
         delivery.basePrice += delivery.isCOD ? datas.COD : 0;
         delivery.basePrice += delivery.isCamion ? datas.Camion : 0;
