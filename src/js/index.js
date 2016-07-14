@@ -172,7 +172,7 @@ var app = {
         console.log(cordova.file);
         $.get("json/datas.json", function(res)
         {
-            parseFile(res);
+            setDatas(res);
         });
         //window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/test.html", gotFile, fail);
     }
