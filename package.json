@@ -1,5 +1,5 @@
 {
-  "name": "Facturation Messagerie C.R",
+  "name": "Facturation-Messagerie-C.R",
   "version": "0.0.9",
   "scripts": {
     "start": "concurrently \"npm run watchJS\" \"npm run watchCSS\"  ",

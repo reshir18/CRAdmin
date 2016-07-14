@@ -16,12 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var jQuery = $ = require('jquery');
+window["jQuery"] = window["$"] = require('jquery');
+window["customers"] = null;
+window["datas"] = null;
 var Vue = require("vue");
 var Util = require("./util.js");
 var VueRouter = require('vue-router');
-var datas = require('./datas.js');
-var customers = require('./customers.js').customers;
+
+/*var customers = require('./customers.js').customers;*/
 var delivery = require('./delivery.js');
 Vue.use(VueRouter);
 require('bootstrap');
@@ -87,6 +89,7 @@ var DeliveryAdd = Vue.extend({
         }
         else
         {
+            console.log(this.$data.delivery);
             router.go({name: 'home'});
         }
     }
@@ -166,31 +169,12 @@ router.start(App, "#navigationMenu")
 var app = {
     // Application Constructor
     initialize: function() {
-
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        console.log(cordova.file);
+        $.get("json/datas.json", function(res)
+        {
+            parseFile(res);
+        });
+        //window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/test.html", gotFile, fail);
     }
 };
 
@@ -288,4 +272,14 @@ function initdatePickers()
         };
         $.datepicker.setDefaults($.datepicker.regional['fr']);
     });
+}
+
+function setDatas(res)
+{
+    datas = res;
+}
+
+function setCustomers(res)
+{
+    datas = res;
 }

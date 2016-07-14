@@ -1,6 +1,6 @@
 var delivery = require("./delivery.js");
 var Util = require("./util.js");
-var datas = require('./datas.js');
+//var datas = require('./datas.js');
 var allDelivery = require("./allDelivery.js").allDeliverys;
 var customers = require('./customers.js').customers;
 let arrayErrorMessage = ["Un client doit être choisi", "Le nom et/ou l'adresse du destinataire sont non valides" ,
@@ -49,6 +49,7 @@ function addDeliveryToCustomer(deliveryObj, idx)
         allDelivery[allDelivery.length -1].idCustomer = id;
         allDelivery[allDelivery.length -1].postalCodeD = fullPostalCode;
         customers[idx].nbDeliverys++;
+        resetDelivery();
         return null;
     }
     return errorMessage;
@@ -161,28 +162,16 @@ function calculDelivery()
     }
 }
 
-function resetDelivery(deliveryObj)
+function resetDelivery()
 {
-    deliveryObjTemp = {
-        date:"",
-        basePrice : 0.00,
-        gazPrice : 0.00,
-        taxesPrice : 0.00,
-        totalDelivery : 0.00,
-        nbLbsPlus : 0,
-        nbMinutesWaitPlus : 0,
-        nbMinutesFindPlus : 0,
-        isTarifHeure : false,
-        isAllerRetour : false,
-        isCamion : false,
-        isCOD : false,
-        idCustomer : 0,
-        typeTarifRegulier : 0,
-        nbHeures : 0,
-        otherFee :[],
-        adresseD : "",
-        postalCodeD : "",
-        nameD : ""
-    }
-    delivery = deliveryObjTemp;
+    delivery.isAllerRetour = false;
+    $('#cbxAllerRetour').prop('checked', false);
+    delivery.isCamion = false;
+    $('#cbxCamion').prop('checked', false);
+    delivery.isCOD = false;
+    $('#cbxCOD').prop('checked', false);
+    delivery.typeTarifRegulier = 0;
+    $("input:radio[name='radio']:checked").prop('checked', false);
+    delivery.basePrice = 0;
+    addTaxes();
 }
