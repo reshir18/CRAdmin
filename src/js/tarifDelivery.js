@@ -2,7 +2,6 @@ var delivery = require("./delivery.js");
 var Util = require("./util.js");
 //var datas = require('./datas.js');
 var allDelivery = require("./allDelivery.js").allDeliverys;
-var customers = require('./customers.js').customers;
 let arrayErrorMessage = ["Un client doit être choisi", "Le nom et/ou l'adresse du destinataire sont non valides" ,
  "Le code postal du destinataire est non valide", "Le cout de la livraison doit être supérieur à zéro"];
 

@@ -1,4 +1,3 @@
-var customers = require("./customers.js").customers;
 var Util = require("./util.js");
 //var datas = require('./datas.js');
 

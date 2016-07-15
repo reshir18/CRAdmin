@@ -168,11 +168,16 @@ router.start(App, "#navigationMenu")
 //var vueMainPage = new Vue({ el: '#main-page'})
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function()
+    {
         console.log(cordova.file);
         $.get("json/datas.json", function(res)
         {
             setDatas(res);
+        });
+        $.get("json/customers.json", function(res)
+        {
+            setCustomers(res);
         });
         //window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/test.html", gotFile, fail);
     }
@@ -281,5 +286,5 @@ function setDatas(res)
 
 function setCustomers(res)
 {
-    datas = res;
+    customers = res.customers;
 }
