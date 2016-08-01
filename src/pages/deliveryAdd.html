@@ -30,7 +30,7 @@
           </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-6">
           <div class="panel panel-success">
             <div class="panel-heading"><h3 class="panel-title">Destinataire</h3></div>
             <div class="panel-body">
@@ -40,13 +40,13 @@
                       <input class="form-control" v-model="delivery.nameD" id="inputNameA" value="" type="text" required></input>
                 </div>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <label for="inputPostalCodeA" class="control-label">Adresse</label>
                 <div class="input-group col-md-10">
                       <input class="form-control" v-model="delivery.adresseD" id="inputAdresseA" value="" type="text" required></input>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <label for="inputPostalCodeA" class="control-label">Code postal</label>
                 <div class="row">
                   <div class="col-md-6">
@@ -67,33 +67,29 @@
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
           <div class="panel panel-success">
-            <div class="panel-heading"><h3 class="panel-title">Tarification</h3></div>
-            <div class="panel-body inline">
-              <div id="tab" class="btn-group" data-toggle="buttons-radio">
-                <a href="#regPanel" class="btn btn-large btn-success" id = "btnRadioTypeTarificationReg" selected data-toggle="tab">Réguilère</a>
-                <a href="#hourPanel" class="btn btn-large btn-success" id = "btnRadioTypeTarificationHeure" data-toggle="tab">À l'heure</a>
+            <div class="panel-heading"><h3 class="panel-title">Tarification et Date</h3></div>
+            <div class="panel-body">
+              <div class="row ">
+                <div class = "col-md-8 col-md-offset-2">
+                  <div id="tab" class="btn-group " data-toggle="buttons-radio">
+                    <a href="#regPanel" class="btn btn-large btn-success" id = "btnRadioTypeTarificationReg" selected data-toggle="tab">Réguilère</a>
+                    <a href="#hourPanel" class="btn btn-large btn-success" id = "btnRadioTypeTarificationHeure" data-toggle="tab">À l'heure
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2">
-          <div class="panel panel-success">
-            <div class="panel-heading"><h3 class="panel-title">Date et heure</h3></div>
-            <div class="panel-body inline">
-              <div class="input-group clockpicker">
-                <input type="text" class="form-control col-md-6" value="">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                </span>
-              </div>
-              <div class="input-group datepicker-class">
-                <input v-model="delivery.date" type="text" class="form-control col-md-6" id="datepicker" value="">
-                <span class="input-group-addon">
-                    <span id="btn-datepicker-span" class="glyphicon glyphicon-calendar"></span>
-                </span>
+              </br>
+              <div class="row ">
+                <div class = "col-md-8 col-md-offset-2">
+                  <div class="input-group datepicker-class">
+                    <input v-model="delivery.date" type="text" class="form-control col-md-6" id="datepicker" value="">
+                    <span class="input-group-addon">
+                        <span id="btn-datepicker-span" class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
