@@ -91,6 +91,7 @@ function createCustomer(customer)
 		nbDeliverys : 0,
 	}
 	customers.push(objTemp);
+	Util.Save('customers', {customers : customers});
 }
 
 function modifyCustomer(customer, idx)
@@ -111,4 +112,5 @@ function modifyCustomer(customer, idx)
 		nbDeliverys : customer.nbDeliverys,
 	}
 	customers[idx] = objTemp;
+	Util.Save('customers', {customers : customers});
 }

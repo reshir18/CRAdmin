@@ -8,8 +8,8 @@
             <div class="panel-heading"><h3 class="panel-title">Poides des colis</h3></div>
             <div class="panel-body">
               <ul class="list-group">
-                <li class="list-group-item"><span  type="text"> N.B livres gratuites: </span><input class="" type="text" value = "{{datas.lbsNB}}"></input></li>
-                <li class="list-group-item"><span  type="text"> $/livres sup: </span><input class="" type="text" value = "{{datas.lbsPrix}}"></input></li>
+                <li class="list-group-item"><span  type="text"> N.B livres gratuites: </span><input class="" type="text" number v-model = "datas.lbsNB"></input></li>
+                <li class="list-group-item"><span  type="text"> $/livres sup: </span><input class="" type="text" number v-model = "datas.lbsPrix"></input></li>
               </ul>
             </div>
           </div>
@@ -20,8 +20,8 @@
             <div class="panel-heading"><h3 class="panel-title">Temps d'attente</h3></div>
             <div class="panel-body">
               <ul class="list-group">
-                <li class="list-group-item"><span  type="text"> Minutes gratuites: </span><input class="" type="text" value = "{{datas.tempsA}}"></input></li>
-                <li class="list-group-item"><span  type="text"> $/minutes sup: </span><input class="" type="text" value = "{{datas.tempsAPrix}}"></input></li>
+                <li class="list-group-item"><span  type="text"> Minutes gratuites: </span><input class="" type="text" number v-model = "datas.tempsA"></input></li>
+                <li class="list-group-item"><span  type="text"> $/minutes sup: </span><input class="" type="text" number v-model = "datas.tempsAPrix"></input></li>
               </ul>
             </div>
           </div>
@@ -32,8 +32,8 @@
             <div class="panel-heading"><h3 class="panel-title">Temps de recherche</h3></div>
             <div class="panel-body">
               <ul class="list-group">
-                <li class="list-group-item"><span  type="text"> Minutes gratuites: </span><input class="" type="text" value = "{{datas.tempsR}}"></input></li>
-                <li class="list-group-item"><span  type="text"> $/minutes sup: </span><input class="" type="text" value = "{{datas.tempsRPrix}}"></input></li>
+                <li class="list-group-item"><span  type="text"> Minutes gratuites: </span><input class="" type="text" number v-model = "datas.tempsR"></input></li>
+                <li class="list-group-item"><span  type="text"> $/minutes sup: </span><input class="" type="text" number v-model = "datas.tempsRPrix"></input></li>
               </ul>
             </div>
           </div>
@@ -47,7 +47,7 @@
           <div class="panel panel-success">
             <div class="panel-heading"><h3 class="panel-title">C.O.D</h3></div>
             <div class="panel-body">
-              <input class="timepicker" type="text" value = "{{datas.COD}}"></input>
+              <input class="timepicker" type="text" number v-model = "datas.COD"></input>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
           <div class="panel panel-success">
             <div class="panel-heading"><h3 class="panel-title">Frais Camion</h3></div>
             <div class="panel-body">
-              <input class="timepicker" type="text" value = "{{datas.Camion}}"></input>
+              <input class="timepicker" type="text" number v-model=datas.Camion></input>
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@
           <div class="panel panel-success">
             <div class="panel-heading"><h3 class="panel-title">Tarif à l'heure</h3></div>
             <div class="panel-body">
-              <input class="timepicker" type="text" value = "{{datas.TarifHeure}}"></input>
+              <input class="timepicker" type="text" number v-model = "datas.TarifHeure"></input>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@
           <div class="panel panel-success">
             <div class="panel-heading"><h3 class="panel-title">Surcharge d'essence</h3></div>
             <div class="panel-body">
-              <input class="timepicker" type="text" value = "{{datas.SurchargeEssence}}"></input>
+              <input class="timepicker" type="text" number v-model = "datas.SurchargeEssence"></input>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@
           <div class="panel panel-success">
             <div class="panel-heading"><h3 class="panel-title">TPS</h3></div>
             <div class="panel-body">
-              <input class="timepicker" type="text" value = "{{datas.PercentTPS}}"></input>
+              <input class="timepicker" type="text" number v-model = "datas.PercentTPS"></input>
             </div>
           </div>
         </div>
@@ -92,13 +92,13 @@
           <div class="panel panel-success">
             <div class="panel-heading"><h3 class="panel-title">TVQ</h3></div>
             <div class="panel-body">
-              <input class="timepicker" type="text" value = "{{datas.PercentTVQ}}"></input>
+              <input class="timepicker" type="text" v-model = "datas.PercentTVQ"></input>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Enregistrer</button>
+    <button @click="saveModifAdmin" type="button" class="btn btn-success"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Enregistrer</button>
   </form>
 </div>
 

@@ -1,6 +1,7 @@
 module.exports = {
     getPostalZone: getPostalZone,
-    roundToTwo: roundToTwo
+    roundToTwo: roundToTwo,
+    Save : save
 }
 
 function getPostalZone(code)
@@ -47,4 +48,8 @@ function getPostalZone(code)
 
 function roundToTwo(num) {
     return +(Math.round(num + "e+2")  + "e-2");
+}
+
+function save(key, value) {
+    localStorage.setItem(key, JSON.stringify(value, null, '\t'));
 }

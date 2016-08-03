@@ -43,11 +43,19 @@ function addDeliveryToCustomer(deliveryObj, idx)
     {
         let id = customers[idx].id;
         let objTemp = Object.assign({}, delivery);
-        allDelivery.push(objTemp);
-        allDelivery[allDelivery.length -1].idDelivery = allDelivery.length;
-        allDelivery[allDelivery.length -1].idCustomer = id;
-        allDelivery[allDelivery.length -1].postalCodeD = fullPostalCode;
+        var deliv = localStorage.getItem(customers[idx].lastName + "_" + customers[idx].name); //.customers
+        allDeliveryArray = [];
+        if (deliv)
+        {
+            allDeliveryArray = JSON.parse(deliv).allDeliverys;
+            console.log(allDeliveryArray);
+        }
         customers[idx].nbDeliverys++;
+        allDeliveryArray.push(objTemp);
+        allDeliveryArray[allDeliveryArray.length -1].idDelivery = allDeliveryArray.length;
+        allDeliveryArray[allDeliveryArray.length -1].postalCodeD = fullPostalCode;
+        Util.Save(customers[idx].lastName + "_" + customers[idx].name, {allDeliverys : allDeliveryArray});
+        Util.Save('customers', {customers : customers});
         resetDelivery();
         return null;
     }
@@ -127,7 +135,7 @@ function calculDelivery()
             addTaxes();
             return;
         }
-        if($("#customerPostalCodeZone").val() === "12" || zoneP === "12")
+        if($("#customerPostalCodeZone").val() === "12" || zoneP === "12" || $("#customerPostalCodeZone").val() === "" )
         {
             return;
         }
@@ -172,5 +180,6 @@ function resetDelivery()
     delivery.typeTarifRegulier = 0;
     $("input:radio[name='radio']:checked").prop('checked', false);
     delivery.basePrice = 0;
+    delivery.otherFee = [];
     addTaxes();
 }
