@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-    <Identity Name="com.messageriecr.adminCR" Publisher="CN=$username$" Version="0.0.1.0" />
+    <Identity Name="com.messageriecr.adminCR" Publisher="CN=$username$" Version="0.5.1.0" />
     <mp:PhoneIdentity PhoneProductId="55094300-4d33-11e6-ae08-6bd61729c460" PhonePublisherId="db093ed5-53b1-45f7-af72-751e8f36ab80" />
     <Properties>
         <DisplayName>AdminCR</DisplayName>

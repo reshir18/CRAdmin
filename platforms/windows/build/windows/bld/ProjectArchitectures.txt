@@ -1,0 +1,1 @@
+C:\Users\Michael\Documents\GitHub\CRAdmin\platforms\windows\CordovaApp.Windows10.jsproj;x64

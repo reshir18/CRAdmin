@@ -16,6 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+ if(!localStorage.getItem('datas'))
+ {
+    localStorage.setItem('customers', JSON.stringify(require("./customers"), null, '\t'));
+    localStorage.setItem('datas', JSON.stringify(require("./datas.js"), null, '\t'));
+ }
+ //localStorage.setItem('datas', JSON.stringify(require("./datas.js"), null, '\t'));
+ /*localStorage.setItem('myKey', JSON.stringify({ my: 'data' }, null, '\t'));
+ localStorage.setItem('myKey', JSON.stringify({ my: 'data' }, null, '\t'));*/
 window["jQuery"] = window["$"] = require('jquery');
 window["customers"] = null;
 window["datas"] = null;
@@ -163,22 +171,49 @@ router.map({
 // Now we can start the app!
 // The router will create an instance of App and mount to
 // the element matching the selector #app.
-
+/*localStorage.setItem('myKey', JSON.stringify({ my: 'data' }, null, '\t'));*/
 router.start(App, "#navigationMenu")
+document.addEventListener("deviceready", init, false);
+function init() 
+{
+    var data = localStorage.getItem('datas'); //.customers
+    if (data) 
+    {  
+       window["datas"] = JSON.parse(data);
+    }
+    data = localStorage.getItem('customers');
+    if (data) 
+    {  
+       window["customers"] = JSON.parse(data).customers;
+    }
+}
+
+function onFileSystemSuccess(fileSystem) {
+        console.log(fileSystem.name);
+    }
+
+    function onResolveSuccess(fileEntry) {
+        console.log(fileEntry.name);
+    }
+
+    function fail(error) {
+        console.log(error.code);
+    }
 //var vueMainPage = new Vue({ el: '#main-page'})
 var app = {
     // Application Constructor
     initialize: function()
     {
         console.log(cordova.file);
-        $.get("json/datas.json", function(res)
+        
+        /*$.get("json/datas.json", function(res)
         {
             setDatas(res);
         });
         $.get("json/customers.json", function(res)
         {
             setCustomers(res);
-        });
+        });*/
         //window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/test.html", gotFile, fail);
     }
 };
@@ -277,11 +312,6 @@ function initdatePickers()
         };
         $.datepicker.setDefaults($.datepicker.regional['fr']);
     });
-}
-
-function setDatas(res)
-{
-    datas = res;
 }
 
 function setCustomers(res)
