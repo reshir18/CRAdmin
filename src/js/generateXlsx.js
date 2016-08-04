@@ -1,4 +1,4 @@
-var XLSX = require('xlsx');
+var XLSX = require('xlsx-style');
 var FileSaver = require('file-saver');
 module.exports = {
     CreateXlsx : create
@@ -6,20 +6,41 @@ module.exports = {
 
 function crateCompanyBaseInfo(ws)
 {
-	var range = {s: {c:0, r:7}, e: {c:2, r:8 }};
-	var cell = { v: "9314-6926 Québec Inc." };
-	cell.t = 's';
-	var cell_ref = XLSX.utils.encode_cell({c:0,r:7});
-	ws[cell_ref] = cell;
-	cell = { v: "60 Chantovent " };
+	var range = {s: {c:0, r:7}, e: {c:2, r:12 }};
+	//var cell = { v: "9314-6926 Québec Inc." };
+	//cell.t = 's';
+	//var cell_ref = XLSX.utils.encode_cell({c:0,r:7});
+	ws[XLSX.utils.encode_cell({c:0,r:7})] = createInfo("9314-6926 Québec Inc.");
+	ws[XLSX.utils.encode_cell({c:0,r:8})] = createInfo("60 Chantovent");
+	ws[XLSX.utils.encode_cell({c:0,r:9})] = createInfo("Québec (Qc)");
+	ws[XLSX.utils.encode_cell({c:0,r:11})] = createInfo("418-660-8668");
+	ws[XLSX.utils.encode_cell({c:0,r:12})] = createInfo("messageriecr@hotmail.com");
+	/*cell = { v: "60 Chantovent " };
 	cell_ref = XLSX.utils.encode_cell({c:0,r:8});
-	ws[cell_ref] = cell;
+	ws[cell_ref] = cell;*/
 
 	//MergeLines
 	var merges = ws['!merges'] = [];
 	merges.push( { s: 'A8', e: 'C8' } );
 	merges.push( { s: 'A9', e: 'B9' } );
+	merges.push( { s: 'A10', e: 'B10' } );
+	merges.push( { s: 'A12', e: 'B12' } );
+	merges.push( { s: 'A13', e: 'C13' } );
 	ws['!ref'] = XLSX.utils.encode_range(range);
+}
+
+function createInfo(info)
+{
+	cell = { v: info};
+	cell.cellStyles = true;
+	styleC = {
+		border: {
+			top :{style: 'thin'}
+		}
+	}
+	cell.cellStyle = styleC;
+	cell.t = 's';
+	return cell;
 }
 
 function create(client)
@@ -66,7 +87,7 @@ function create(client)
 	wb.Sheets[ws_name] = ws;
 
 	/* write file */
-	var wopts = { bookType:'xlsx', bookSST:false, type:'binary' };
+	var wopts = { bookType:'xlsx', bookSST:false, type:'binary', cellStyles: true};
 
 	var wbout = XLSX.write(wb,wopts);
 	/* the saveAs call downloads a file on the local machine */
