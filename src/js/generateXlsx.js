@@ -32,13 +32,8 @@ function crateCompanyBaseInfo(ws)
 function createInfo(info)
 {
 	cell = { v: info};
-	cell.cellStyles = true;
-	styleC = {
-		border: {
-			top :{style: 'thin'}
-		}
-	}
-	cell.cellStyle = styleC;
+	styleC = { italic :true};
+	cell.s = styleC;
 	cell.t = 's';
 	return cell;
 }
@@ -87,7 +82,7 @@ function create(client)
 	wb.Sheets[ws_name] = ws;
 
 	/* write file */
-	var wopts = { bookType:'xlsx', bookSST:false, type:'binary', cellStyles: true};
+	var wopts = { bookType:'xlsx', bookSST:false, type:'binary'};
 
 	var wbout = XLSX.write(wb,wopts);
 	/* the saveAs call downloads a file on the local machine */
