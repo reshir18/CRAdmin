@@ -18,7 +18,7 @@ function addAmount()
 {
     delivery.isCOD = document.getElementById('cbxCOD').checked;
     delivery.isCamion = document.getElementById('cbxCamion').checked;
-    delivery.isAllerRetour = document.getElementById('cbxAllerRetour').checked;
+    delivery.isPickUp = document.getElementById('cbxPickUp').checked;
 }
 
 function addTaxes()
@@ -64,7 +64,7 @@ function addDeliveryToCustomer(deliveryObj, idx)
 
 function validateDelivery(deliveryObj)
 {
-    if(!delivery.adresseD || !delivery.nameD)
+    if(!delivery.adresseD)
         return arrayErrorMessage[1];
     if(delivery.basePrice <= 0)
         return arrayErrorMessage[3];

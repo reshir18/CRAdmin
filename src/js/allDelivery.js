@@ -19,7 +19,7 @@ module.exports ={
 		otherFee :[],
 		adresseD : "3162 rue des verdiers",
 		postalCodeD : "G3A 1A1",
-		nameD : "Elvis Wong",
+		nbBill : 00000,
 		idDelivery : 1
 	}
 

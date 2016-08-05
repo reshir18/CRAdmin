@@ -3,7 +3,7 @@
 	<div class="col-md-3">
 		<div class="panel panel-success">
 			<div class="panel-heading">Service</div>
-			<div class="funkyradio">
+			<div v-show="delivery.isCamion" class="funkyradio">
 				<div class="funkyradio-success">
 		            <input type="radio"  value="1" name="radio" id="radioService1" v-model="delivery.typeTarifRegulier" class="radioButtonService" />
 		            <label for="radioService1">1 Heure</label>
@@ -44,10 +44,10 @@
 					    </div>
 					</li>
 					<li class="list-group-item">
-					    Aller retour
+					    Colis ramassé
 					    <div class="material-switch pull-right">
-					        <input id="cbxAllerRetour" onclick="addAmount()" name="cbxAllerRetour" v-model="delivery.isAllerRetour" type="checkbox" class="radioButtonFraisSup"/>
-					        <label for="cbxAllerRetour" class="label-success"></label>
+					        <input id="cbxPickUp" onclick="addAmount()" name="cbxPickUp" v-model="delivery.isPickUp" type="checkbox" class="radioButtonFraisSup"/>
+					        <label for="cbxPickUp" class="label-success"></label>
 					    </div>
 					</li>
 				</ul>
