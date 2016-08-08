@@ -6,18 +6,12 @@ module.exports = {
 
 function createCompanyBaseInfo(ws)
 {
-	var range = {s: {c:0, r:7}, e: {c:2, r:12 }};
-	//var cell = { v: "9314-6926 Québec Inc." };
-	//cell.t = 's';
-	//var cell_ref = XLSX.utils.encode_cell({c:0,r:7});
 	ws[XLSX.utils.encode_cell({c:0,r:7})] = createInfo("9314-6926 Québec Inc.");
 	ws[XLSX.utils.encode_cell({c:0,r:8})] = createInfo("60 Chantovent");
 	ws[XLSX.utils.encode_cell({c:0,r:9})] = createInfo("Québec (Qc)");
+	ws[XLSX.utils.encode_cell({c:0,r:10})] = createInfo("G1C 6H2");
 	ws[XLSX.utils.encode_cell({c:0,r:11})] = createInfo("418-660-8668");
 	ws[XLSX.utils.encode_cell({c:0,r:12})] = createInfo("messageriecr@hotmail.com");
-	/*cell = { v: "60 Chantovent " };
-	cell_ref = XLSX.utils.encode_cell({c:0,r:8});
-	ws[cell_ref] = cell;*/
 
 	//MergeLines
 	var merges = ws['!merges'] = [];
@@ -26,35 +20,37 @@ function createCompanyBaseInfo(ws)
 	merges.push( { s: 'A10', e: 'B10' } );
 	merges.push( { s: 'A12', e: 'B12' } );
 	merges.push( { s: 'A13', e: 'C13' } );
-
-	merges.push( { s: 'E8', e: 'F8' } );
-	merges.push( { s: 'E9', e: 'G9' } );
-	merges.push( { s: 'E10', e: 'G11' } );
-	merges.push( { s: 'E12', e: 'F12' } );
-	ws['!ref'] = XLSX.utils.encode_range(range);
 }
 
-function createCustomerBaseInfo(ws)
+function createCustomerBaseInfo(ws, client)
 {
-	var range = {s: {c:0, r:7}, e: {c:2, r:12 }};
-	//var cell = { v: "9314-6926 Québec Inc." };
-	//cell.t = 's';
-	//var cell_ref = XLSX.utils.encode_cell({c:0,r:7});
-	ws[XLSX.utils.encode_cell({c:0,r:7})] = createInfo("9314-6926 Québec Inc.");
-	ws[XLSX.utils.encode_cell({c:0,r:8})] = createInfo("60 Chantovent");
-	ws[XLSX.utils.encode_cell({c:0,r:9})] = createInfo("Québec (Qc)");
-	ws[XLSX.utils.encode_cell({c:0,r:11})] = createInfo("418-660-8668");
-	ws[XLSX.utils.encode_cell({c:0,r:12})] = createInfo("messageriecr@hotmail.com");
-	/*cell = { v: "60 Chantovent " };
-	cell_ref = XLSX.utils.encode_cell({c:0,r:8});
-	ws[cell_ref] = cell;*/
+	ws[XLSX.utils.encode_cell({c:4,r:1})] = createInfo("Compte            " + client.telephone);
+	ws[XLSX.utils.encode_cell({c:4,r:7})] = createInfo("Facturé à :");
+	ws[XLSX.utils.encode_cell({c:4,r:8})] = createInfo(client.compagnieName);
+	ws[XLSX.utils.encode_cell({c:4,r:9})] = createInfo(client.address);
+	ws[XLSX.utils.encode_cell({c:4,r:11})] = createInfo(client.postalCode);
 
 	//MergeLines
-	var merges = ws['!merges'] = [];
-	merges.push( { s: 'E8', e: 'F8' } );
-	merges.push( { s: 'E9', e: 'G9' } );
-	merges.push( { s: 'E10', e: 'G11' } );
-	merges.push( { s: 'E12', e: 'F12' } );
+	var merges2 = ws['!merges'] = [];
+	merges2.push( { s: 'E2', e: 'G2' } );
+	merges2.push( { s: 'E8', e: 'F8' } );
+	merges2.push( { s: 'E9', e: 'G9' } );
+	merges2.push( { s: 'E10', e: 'G11' } );
+	merges2.push( { s: 'E12', e: 'F12' } );
+}
+
+function createBaseTable(ws)
+{
+	var range = {s: {c:0, r:1}, e: {c:6, r:13 }};
+	ws[XLSX.utils.encode_cell({c:0,r:12})] = createInfo("Date");
+	ws[XLSX.utils.encode_cell({c:1,r:12})] = createInfo("No");
+	ws[XLSX.utils.encode_cell({c:2,r:12})] = createInfo("Service");
+	ws[XLSX.utils.encode_cell({c:3,r:12})] = createInfo("Adresse");
+	ws[XLSX.utils.encode_cell({c:4,r:12})] = createInfo("C.P.");
+	ws[XLSX.utils.encode_cell({c:5,r:12})] = createInfo("Ajout");
+	ws[XLSX.utils.encode_cell({c:6,r:12})] = createInfo("Tarif");
+
+	//MergeLines
 	ws['!ref'] = XLSX.utils.encode_range(range);
 }
 
@@ -111,8 +107,9 @@ function create(client)
 	    }
 	}
 
-	ws['!ref'] = XLSX.utils.encode_range(range);
 	createCompanyBaseInfo(ws);
+	createCustomerBaseInfo(ws, client);
+	createBaseTable(ws);
 	/* add worksheet to workbook */
 	wb.SheetNames.push(ws_name);
 	wb.Sheets[ws_name] = ws;

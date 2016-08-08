@@ -1,3 +1,4 @@
 [0714/140323:ERROR:settings.cc(261)] Settings magic is not 1129342067
 [0804/114256:ERROR:file_io.cc(41)] write: Le canal de communication est sur le point d’être fermé. (0xE8)
 [0804/122340:ERROR:file_io.cc(41)] write: Le canal de communication est sur le point d’être fermé. (0xE8)
+[0808/153456:ERROR:file_io.cc(41)] write: Le canal de communication est sur le point d’être fermé. (0xE8)
