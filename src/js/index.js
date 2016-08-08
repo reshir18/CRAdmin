@@ -48,7 +48,7 @@ var doc = new jsPDF();*/
 doc.text(30, 20, 'Hello world!');
 doc.addImage(imgData, 'JPEG', 15, 40, 66, 66);*/
 //doc.save('IMGTest.pdf');
-XlsxObject.CreateXlsx("Moi le client");
+
 
 //var workbook = Excel.Workbook();
 
@@ -130,7 +130,12 @@ var Admin = Vue.extend({
 
 var AllDelivery = Vue.extend({
     template:  require("../pages/allDeliveryPerCustomer.html"),
-    data: function () {return {delivery : deliveryListCustomer, customer : currentCustomer}}
+    data: function () {return {delivery : deliveryListCustomer, customer : currentCustomer}},
+    methods : {
+        billCustomer : function(event){
+            XlsxObject.CreateXlsx(this.$data.customer);
+        }
+    }//
 })
 
 var vueTarifRegulierComponent = Vue.extend({

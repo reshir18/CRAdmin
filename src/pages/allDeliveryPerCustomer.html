@@ -27,7 +27,7 @@
 							Tarification: <strong>régulière - Service: </strong>
 							<strong v-if="del.typeTarifRegulier == '1'">1 heure</strong>
 							<strong v-if="del.typeTarifRegulier == '2'">2-3 heures</strong>
-							<strong v-if="del.typeTarifRegulier == '3'">même jour</strong>
+							<strong v-if="del.typeTarifRegulier == '3'">m-jour</strong>
 							<strong v-if="del.typeTarifRegulier == '4'">lendemain</strong>
 						</template>
 					</div>
@@ -44,4 +44,5 @@
 		</div>
 	</div>
 	</template>
+	<button @click="billCustomer" type="button" class="btn btn-success"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Facturer</button>
 </div>

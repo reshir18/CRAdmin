@@ -4,7 +4,7 @@ module.exports = {
     CreateXlsx : create
 }
 
-function crateCompanyBaseInfo(ws)
+function createCompanyBaseInfo(ws)
 {
 	var range = {s: {c:0, r:7}, e: {c:2, r:12 }};
 	//var cell = { v: "9314-6926 Québec Inc." };
@@ -26,6 +26,35 @@ function crateCompanyBaseInfo(ws)
 	merges.push( { s: 'A10', e: 'B10' } );
 	merges.push( { s: 'A12', e: 'B12' } );
 	merges.push( { s: 'A13', e: 'C13' } );
+
+	merges.push( { s: 'E8', e: 'F8' } );
+	merges.push( { s: 'E9', e: 'G9' } );
+	merges.push( { s: 'E10', e: 'G11' } );
+	merges.push( { s: 'E12', e: 'F12' } );
+	ws['!ref'] = XLSX.utils.encode_range(range);
+}
+
+function createCustomerBaseInfo(ws)
+{
+	var range = {s: {c:0, r:7}, e: {c:2, r:12 }};
+	//var cell = { v: "9314-6926 Québec Inc." };
+	//cell.t = 's';
+	//var cell_ref = XLSX.utils.encode_cell({c:0,r:7});
+	ws[XLSX.utils.encode_cell({c:0,r:7})] = createInfo("9314-6926 Québec Inc.");
+	ws[XLSX.utils.encode_cell({c:0,r:8})] = createInfo("60 Chantovent");
+	ws[XLSX.utils.encode_cell({c:0,r:9})] = createInfo("Québec (Qc)");
+	ws[XLSX.utils.encode_cell({c:0,r:11})] = createInfo("418-660-8668");
+	ws[XLSX.utils.encode_cell({c:0,r:12})] = createInfo("messageriecr@hotmail.com");
+	/*cell = { v: "60 Chantovent " };
+	cell_ref = XLSX.utils.encode_cell({c:0,r:8});
+	ws[cell_ref] = cell;*/
+
+	//MergeLines
+	var merges = ws['!merges'] = [];
+	merges.push( { s: 'E8', e: 'F8' } );
+	merges.push( { s: 'E9', e: 'G9' } );
+	merges.push( { s: 'E10', e: 'G11' } );
+	merges.push( { s: 'E12', e: 'F12' } );
 	ws['!ref'] = XLSX.utils.encode_range(range);
 }
 
@@ -48,6 +77,13 @@ function create(client)
 	var ws = {}
 	var data = [[1,2,3],[true, false, null, "sheetjs"],["foo","bar","0.3"], ["baz", null, "qux"]]
 	var ws_name = "SheetJS";
+	var wscols = [
+	{},
+	{},
+	{},
+	{wch:32}
+];
+	ws['!cols'] = wscols;
 	/* the range object is used to keep track of the range of the sheet */
 	var range = {s: {c:0, r:0}, e: {c:0, r:0 }};
 	/* Iterate through each element in the structure */
@@ -76,7 +112,7 @@ function create(client)
 	}
 
 	ws['!ref'] = XLSX.utils.encode_range(range);
-	crateCompanyBaseInfo(ws);
+	createCompanyBaseInfo(ws);
 	/* add worksheet to workbook */
 	wb.SheetNames.push(ws_name);
 	wb.Sheets[ws_name] = ws;
@@ -86,7 +122,7 @@ function create(client)
 
 	var wbout = XLSX.write(wb,wopts);
 	/* the saveAs call downloads a file on the local machine */
-	FileSaver.saveAs(new Blob([s2ab(wbout)],{type:""}), client + ".xlsx");
+	FileSaver.saveAs(new Blob([s2ab(wbout)],{type:""}), client.name + ".xlsx");
 }
 
 function s2ab(s)

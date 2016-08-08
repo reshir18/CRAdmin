@@ -30,30 +30,26 @@ function validate(customer)
 {
     if(!customer)
         return false;
-    if(!validateNames(customer.name, customer.lastName))
+    if(!validateNames(customer.name))
     	return false
-    if(!validatePhones(customer.telHome, customer.telCel))
+    if(!validatePhones(customer.telHome))
     	return false;
-    if(!validateAddressAndMail(customer.address, customer.email))
+    if(!validateAddressAndMail(customer.address))
     	return false;
     return validatePostalCodes(customer.postalCode1, customer.postalCode2);
 }
 
-function validatePhones(telHome, telCel)
+function validatePhones(telHome)
 {
 	if(!telHome)
 		return false;
 	let phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
-	if(telHome.match(phoneRegex))
-	{
-		return (!telCel || telCel.match(phoneRegex));
-	}
-	return false;
+	return telHome.match(phoneRegex);
 }
 
 function validateNames(name, lastName)
 {
-	return (name && lastName);
+	return (name);
 }
 
 function validatePostalCodes(code1, code2)
@@ -66,10 +62,11 @@ function validatePostalCodes(code1, code2)
 	}
 	return false;
 }
-function validateAddressAndMail(address, mail)
+function validateAddressAndMail(address)
 {
+	return address;
 	if(!address)
-		return false;
+		return address;
 	return (mail);
 }
 
@@ -80,14 +77,11 @@ function createCustomer(customer)
 	let objTemp = {
 		id: customers.length +1,
 		name: customer.name,
-		lastName: customer.lastName,
 		compagnieName : customer.compagnieName ? customer.compagnieName: "---",
 		address : customer.address,
 		postalCode : fullPostalCode,
 		zone: pZone,
 		telephone: customer.telHome,
-		cell : customer.telCel ? customer.telCel : "---",
-		mail : customer.email,
 		nbDeliverys : 0,
 	}
 	customers.push(objTemp);
@@ -101,14 +95,11 @@ function modifyCustomer(customer, idx)
 	let objTemp = {
 		id: customers[idx].id,
 		name: customer.name,
-		lastName: customer.lastName,
 		compagnieName : customer.compagnieName ? customer.compagnieName: "---",
 		address : customer.address,
 		postalCode : fullPostalCode,
 		zone: pZone,
 		telephone: customer.telHome,
-		cell : customer.telCel ? customer.telCel : "---",
-		mail : customer.email,
 		nbDeliverys : customer.nbDeliverys,
 	}
 	customers[idx] = objTemp;
