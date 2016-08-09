@@ -32,6 +32,10 @@ function createCustomerBaseInfo(ws, client)
 
 	//MergeLines
 	var merges2 = ws['!merges'] = [];
+	merges2.push( { s: 'A8', e: 'C8' } );
+	merges2.push( { s: 'A9', e: 'B9' } );
+	merges2.push( { s: 'A10', e: 'B10' } );
+	merges2.push( { s: 'A12', e: 'B12' } );
 	merges2.push( { s: 'E2', e: 'G2' } );
 	merges2.push( { s: 'E8', e: 'F8' } );
 	merges2.push( { s: 'E9', e: 'G9' } );
